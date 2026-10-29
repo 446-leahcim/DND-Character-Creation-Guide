@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css.css">
+    <title>Dnd Worksite</title>
+</head>
+<body>
+     <div class="header">
+            <h3>Character Creater</h3>
+        </div>
+    <div id="Container-1">
+       
+    <aside class="Switch-menu">
+        <ul>
+            <li><a href="Index.html"> Character Creater</a></li>
+            <li><a href="Wiki.html"> Wiki </a></li>
+            <li><a href="Spells.html"> Spells </a></li>
+            <li><a href="Mapmaker.html"> Map maker </a></li>
+            <li><a href="DM-Tools.html"> Dm Tools </a></li>
+            <li><a href="Monsters.html"> Monsters </a></li>
+            <li><a href="Starter-Info.html"> Starter Info </a></li>
+        </ul>
+    </aside>
+    <div class="MainContent">
+        <!-- <select id="dropBox">
+            <option>Character-inputs</option>
+            <option>Character-Sheet</option>
+        </select> -->
+        <h3>Character name</h3>
+        <input type="text" id="CharacterName">
+
+        <h4 class="InputTitle">class</h4>
+        <select for="classSelect" class="form-label"> 
+            <option>Class Select</option> 
+        </select>
+
+        <select id="SubclassSelect">
+            <option value="">Select subclass</option>
+        </select>
+        <p id="subclassDescription"></p>
+        <h4 class="InputTitle">Character Level</h4>
+        <input id="LV" type="number" min="1" max="20">
+
+        <h4 class="InputTitle">Background</h4>
+        <select id="backgroundinput">
+            <option>Select Background</option>
+            <option>Acolyte</option>
+            <option>Charlatan</option>
+            <option>Criminal</option>
+            <option>Entertainer</option>
+            <option>Folk Hero</option>
+            <option>Guild Artisan</option>
+            <option>Hermit</option>
+            <option>Knight</option>
+            <option>Noble</option>
+            <option>Outlander</option>
+            <option>Sage</option>
+            <option>Sailor</option>
+            <option>Soldier</option>
+            <option>Urchin</option>
+            <option>Pirate</option>
+            <option>Spy</option>
+            <option>Gladiator</option>
+            <option>Haunted One</option>
+            <option>Far Traveler</option>
+            <option>Inheritor</option>
+            <option>Urban Bounty Hunter</option>
+            <option>Mercenary Veteran</option>
+            <option>City Watch</option>
+            <option>Clan Crafter</option>
+            <option>Courtier</option>
+            <option>Faction Agent</option>
+            <option>Gate Warden</option>
+        </select>
+    <h2>Inventory</h2>
+    <p>Drag items to rearrange them.</p>
+
+    <ul id="inventory" class="list-group mb-3">
+        <!-- <li class="list-group-item">Spellbook</li>
+        <li class="list-group-item">Backpack</li>
+        <li class="list-group-item">Rope</li> -->
+    </ul>
+
+    <h2>Dice Roller</h2>
+    <div class="input-group mb-2">
+        <input id="diceNotation" class="form-control" value="1d20+3">
+        <button id="rollButton" class="btn btn-primary">
+            Roll
+        </button>
+    </div>
+    <p id="diceResult" aria-live="polite">No roll yet</p>
+
+    <button id="saveButton" class="btn btn-success">
+        Save character
+    </button>
+    <button id="loadButton" class="btn btn-secondary">
+        Load character
+    </button>
+    </div>
+        <button id="CharacterCreatebutton" onclick="Character_SHeet()">Create Character</button>
+    </div>
+</body>
+<script src="Characterprofile.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Dice roller dependencies -->
+    <script src="https://unpkg.com/mathjs@11.8.2/lib/browser/math.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/random-js@2.1.0/dist/random-js.umd.min.js"></script>
+
+    <!-- RPG Dice Roller: use the version shown in its official guide -->
+    <script src="https://cdn.jsdelivr.net/npm/@dice-roller/rpg-dice-roller@latest/lib/umd/bundle.min.js"></script>
+    <!-- <script src="exprioment/rest.js"></script> -->
+</html>
+
+<!-- https://github.com/Dungeons-Developers/DnD-client -->
+ <!-- https://github.com/jjaanila/campaigner/blob/master/README.md -->
+  <!-- https://github.com/rpgtex/DND-5e-LaTeX-Template -->

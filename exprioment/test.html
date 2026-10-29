@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Character Creator</title>
+
+    <!-- Bootstrap: layout and styling -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="container py-4">
+    <h1><i data-lucide="book-open"></i> Character Creator</h1>
+
+    <label for="characterName" class="form-label">
+        Character name
+    </label>
+    <input id="characterName" class="form-control mb-3">
+
+    <label for="classSelect" class="form-label">
+        Class
+    </label>
+    <select id="classSelect" class="form-select mb-3">
+        <option value="">Loading classes...</option>
+    </select>
+
+    <h2>Inventory</h2>
+    <p>Drag items to rearrange them.</p>
+
+    <ul id="inventory" class="list-group mb-3">
+        <li class="list-group-item">Spellbook</li>
+        <li class="list-group-item">Backpack</li>
+        <li class="list-group-item">Rope</li>
+    </ul>
+
+    <h2>Dice Roller</h2>
+    <div class="input-group mb-2">
+        <input id="diceNotation" class="form-control" value="1d20+3">
+        <button id="rollButton" class="btn btn-primary">
+            Roll
+        </button>
+    </div>
+    <p id="diceResult" aria-live="polite">No roll yet</p>
+
+    <button id="saveButton" class="btn btn-success">
+        Save character
+    </button>
+    <button id="loadButton" class="btn btn-secondary">
+        Load character
+    </button>
+
+    <!-- SortableJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Dice roller dependencies -->
+    <script src="https://unpkg.com/mathjs@11.8.2/lib/browser/math.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/random-js@2.1.0/dist/random-js.umd.min.js"></script>
+
+    <!-- RPG Dice Roller: use the version shown in its official guide -->
+    <script src="https://cdn.jsdelivr.net/npm/@dice-roller/rpg-dice-roller@latest/lib/umd/bundle.min.js"></script>
+
+    <script src="rest.js"></script>
+</body>
+</html>
