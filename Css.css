@@ -10,6 +10,15 @@ padding:0;
 border: 3px solid black;
 display: flex;
 }
+#classSelect{
+    width: 200px;
+    height: fit-content;
+}
+#SubclassSelect{
+    width: 200px;
+    height: fit-content;
+    scroll-behavior: auto;
+}
 .header{
     display: flex;
     margin: 5px;

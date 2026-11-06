@@ -1,4 +1,4 @@
-const API = "https://www.dnd5eapi.co/api/2014/";
+// const API = "https://www.dnd5eapi.co/api/2014/";
 
 // Get HTML elements
 const nameInput = document.getElementById("characterName");

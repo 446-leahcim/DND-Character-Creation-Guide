@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Css.css">
+    <!-- <script src="./db.js" defer></script> -->
+    <script src="./game.js" defer></script>
+    <script src="./check.js" defer></script>
     <title>Dnd Worksite</title>
 </head>
 <body>
@@ -32,7 +35,7 @@
         <input type="text" id="CharacterName">
 
         <h4 class="InputTitle">class</h4>
-        <select for="classSelect" class="form-label"> 
+        <select for="classSelect" class="form-label" id="classSelect"> 
             <option>Class Select</option> 
         </select>
 
@@ -46,33 +49,7 @@
         <h4 class="InputTitle">Background</h4>
         <select id="backgroundinput">
             <option>Select Background</option>
-            <option>Acolyte</option>
-            <option>Charlatan</option>
-            <option>Criminal</option>
-            <option>Entertainer</option>
-            <option>Folk Hero</option>
-            <option>Guild Artisan</option>
-            <option>Hermit</option>
-            <option>Knight</option>
-            <option>Noble</option>
-            <option>Outlander</option>
-            <option>Sage</option>
-            <option>Sailor</option>
-            <option>Soldier</option>
-            <option>Urchin</option>
-            <option>Pirate</option>
-            <option>Spy</option>
-            <option>Gladiator</option>
-            <option>Haunted One</option>
-            <option>Far Traveler</option>
-            <option>Inheritor</option>
-            <option>Urban Bounty Hunter</option>
-            <option>Mercenary Veteran</option>
-            <option>City Watch</option>
-            <option>Clan Crafter</option>
-            <option>Courtier</option>
-            <option>Faction Agent</option>
-            <option>Gate Warden</option>
+            
         </select>
     <h2>Inventory</h2>
     <p>Drag items to rearrange them.</p>
@@ -112,6 +89,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@dice-roller/rpg-dice-roller@latest/lib/umd/bundle.min.js"></script>
     <script src="exprioment/rest.js"></script>
+
 </html>
 
 <!-- https://github.com/Dungeons-Developers/DnD-client -->
