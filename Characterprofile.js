@@ -437,10 +437,9 @@ const backGround = [
             ['Inheritor',	'Survival (Wis), and choose 1: Arcana (Int), History (Int), Religion (Int)', 'Gaming set x1, musical instrument x1', '15 gp']
             ['Initiate',	'Athletics (Str), Intimidation (Cha)',	'Gaming set x1, vehicles (land)', '15 gp']
             ['Inquisitor',	'Investigation (Int), Religion (Int)',	'Artisans tools x1, thieves tools',	'15 gp']
-
-//unfinished
-            ['Investigator	VRGtR	Choose 2: Insight (Wis), Investigation (Int), Perception (Wis)	None	Disguise kit, thieves tools	10 gp']
-            ['Iron Route Bandit	CoS (AL)	Animal Handling (Wis), Stealth (Dex)	None	Gaming set x1, vehicles (land)	5 gp']
+            ['Investigator',	'Choose 2: Insight (Wis), Investigation (Int), Perception (Wis)',	'Disguise kit, thieves tools',	'10 gp']
+            ['Iron Route Bandit',	'Animal Handling (Wis), Stealth (Dex)',	'Gaming set x1, vehicles (land)',	'5 gp']
+// unfinished
             ['Izzet Engineer	GGR	Arcana (Int), Investigation (Int)	Choose 1: Draconic, Goblin, Vedalken	Artisans tools x1	5 gp']
             ['Knight of the Order	SCAG	Persuasion (Cha), and choose 1: special (see page)	Any x1	Choose 1: gaming set x1, musical instrument x1	10 gp']
             ['Knight of Solamnia	UA	Athletics (Str), Survival (Wis)	Any x2	None	10 gp']
