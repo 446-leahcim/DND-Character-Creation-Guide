@@ -2,7 +2,7 @@
 
 // Get HTML elements
 const nameInput = document.getElementById("characterName");
-const classSelect = document.getElementById("classSelect");
+// const classSelect = document.getElementById("classSelect");
 const inventory = document.getElementById("inventory");
 const diceInput = document.getElementById("diceNotation");
 const diceResult = document.getElementById("diceResult");

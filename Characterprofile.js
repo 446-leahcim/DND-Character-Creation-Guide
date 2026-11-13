@@ -15,11 +15,11 @@ const subclassDescription = document.getElementById("subclassDescription");
             spellAttribute: 'INT', 
             isHalfCast: true,
             subClass:[
-                        ['Alchemist', 'An Alchemist is an expert at combining reagents to produce magical effects. Alchemists use their creations to give life and to leech it away.'],
-                        ['Armorer', 'An artificer who specializes as an Armorer modifies armor to function almost like a second skin. The armor is enhanced to hone the artificers magic, unleash potent attacks, and generate a formidable defense. The artificer bonds with this armor, becoming one with it even as they experiment with it and refine its magical capabilities.'],
-                        ['Artillerist', 'An Artillerist specializes in using magic t o hurl energy, projectiles, and explosions on a battlefield. This destructive power was valued by all the armies of the Last War. Now that the war is over, some members of this specialization have sought to build a more peaceful world by using their powers to fight the resurgence of strife in Khorvaire. The gnome artificer Vi, an unlikely yet key member of House Canniths warforged project, has been especially vocal about making things right: "Its about time we fixed things instead of blowing them all to hell."'],
-                        ['BattleSmith', 'Battle-Ready: INT for weapon attacks. Steel Defender: loyal mechanical pet that fights for you. Extra Attack at 5th.'],
-                        ['Cartographer', 'Map Mastery: advantage on Navigation checks. Territorial Awareness: bonus action to mark an area, granting allies +1 AC and primaryAttribute while in it. At higher levels, create Cartographic Traps and Shortcut routes.'],
+                    ['Alchemist', 'An Alchemist is an expert at combining reagents to produce magical effects. Alchemists use their creations to give life and to leech it away.'],
+                    ['Armorer', 'An artificer who specializes as an Armorer modifies armor to function almost like a second skin. The armor is enhanced to hone the artificers magic, unleash potent attacks, and generate a formidable defense. The artificer bonds with this armor, becoming one with it even as they experiment with it and refine its magical capabilities.'],
+                    ['Artillerist', 'An Artillerist specializes in using magic t o hurl energy, projectiles, and explosions on a battlefield. This destructive power was valued by all the armies of the Last War. Now that the war is over, some members of this specialization have sought to build a more peaceful world by using their powers to fight the resurgence of strife in Khorvaire. The gnome artificer Vi, an unlikely yet key member of House Canniths warforged project, has been especially vocal about making things right: "Its about time we fixed things instead of blowing them all to hell."'],
+                    ['BattleSmith', 'Battle-Ready: INT for weapon attacks. Steel Defender: loyal mechanical pet that fights for you. Extra Attack at 5th.'],
+                    ['Cartographer', 'Map Mastery: advantage on Navigation checks. Territorial Awareness: bonus action to mark an area, granting allies +1 AC and primaryAttribute while in it. At higher levels, create Cartographic Traps and Shortcut routes.'],
             ]
         },
   { 
@@ -290,6 +290,7 @@ const selectedClass = CLASS_DATA.find(
 switch (selectedClass?.ClassName) {
     case "Artificer":
         console.log("Artificer selected");
+        const hitPointroll = document.getElementById("")
         break;
     case "Barbarian":
         console.log("Barbarian selected");
@@ -335,7 +336,37 @@ switch (selectedClass?.ClassName) {
 }
 
 
-
+// if (Options== "Character-inputs"){
+    let CharacterInputs = [
+        {
+        //Character header inputs
+            name: "",
+            level: "",
+            background: "",
+            PlayerName: "",
+            Race: "",
+            Alignment: "",
+            XP: "",
+        //Main Character inputs
+            Procficiency: "",
+            inspiration: false,
+            Strength: "",
+            Dexterity: "",
+            Constitution: "",
+            Intelligence: "",
+            Wisdom: "",
+            Charisma: "",
+        //Hit point and AC stuff
+            ArmorClass: "",
+            Initiative: "",
+            Speed : 30,
+            HitPoints: "",
+        //Attacks and Spells
+            AttackName: "",
+            ATKBonus: "",
+            DamageType: "",
+        }
+    ];
 
 
 // Create Class options
@@ -391,158 +422,126 @@ subclassSelect.addEventListener("change", () => {
         SUBCLASS_INFO[selectedSubclass] || "";
 
 });
-//
+const backgrounddisplay = document.getElementById("backgroundinput");
 const backGround = [
             ['Acolyte', 'Insight (Wis), Religion (Int)', 'none', '15 gp'],
-            ['Anthropologist',	'Insight (Wis), Religion (Int)', 'none', '10 gp']
-            ['Archaeologist',	'History (Int), Survival (Wis)',	'Any x1	Choose 1: cartographers tools, navigators tools',	'25 gp']
-            ['Athlete',	'Acrobatics (Dex), Athletics (Str)',	'Any x1	Vehicles (Land)', '10 gp']
-            ['Azorius Functionary',	'Insight (Wis), Intimidation (Cha)',	'Any x2	None',  '10 gp']
-            ['Black Fist Double Agent', 'CoS (AL)	Deception (Cha), Insight (Wis)',	'Any X2; Disguise kit, and choose 1: artisans tools x1, gaming set x1',	'15 gp']
-            ['Boros Legionnaire',	'Athletics (Str), Intimidation (Cha)',	'Choose 1: Celestial, Draconic, Goblin, Minotaur	Choose 1: cartographers tools, navigators tools',	'2 gp']
-            ['Caravan Specialist',	'Animal Handling (Wis), Survival (Wis)',	'Any x1	Vehicles (land)',	'10 gp']
-            ['Celebrity Adventurers Scion',	'Perception (Wis), Performance (Cha)',	'Any x2	Disguise kit',	'30 gp']
-            ['Charlatan',	',Deception (Cha), Sleight of Hand (Dex)',	'Disguise kit, forgery kit',	'15 gp']
-            ['City Watch',	'Athletics (Str), Insight (Wis)',	'None',	'10 gp']
-            ['Clan Crafter',	'History (Int), Insight (Wis)',	'Any x1	Artisans tools', '15 gp']
-            ['Cloistered Scholar',	'History (Int)', 'choose 1: Arcana (Int), Nature (Int), Religion (Int)', '10 gp']
-            ['Cormanthor Refugee',	'Nature (Int), Survival (Wis)',	'Artisans tools',	'5 gp']
-            ['Courtier',	'Insight (Wis), Persuasion (Cha)',	'None',	'5 gp']
-            [' Criminal',	'Deception (Cha), Stealth (Dex)',	'Gaming set x1, thieves tools',	'15 gp']
-            ['Dimir Operative',	'Deception (Cha), Stealth (Dex)',	'None',	'Special']
-            ['Dragon Casualty',	'Intimidation (Cha), Survival (Wis)',	'Special (see page)',	'5 gp']
-            ['Earthspur Miner',	'Athletics (Str), Survival (Wis)',	'None',	'5 gp']
-            ['Entertainer',	'Acrobatics (Dex), Performance (Cha)',	'Disguise kit, musical instrument x1',	'15 gp']
-            ['Faceless',	'Deception (Cha), Intimidation (Cha)',	'Disguise kit',	'10 gp']
-            ['Faction Agent',	'Insight (Wis), and choose 1: special (see page)',	'None',	'15 gp']
-            ['Failed Merchant',	'Investigation (Int), Persuasion (Cha)', 'Artisans tools x1',	'10 gp']
-            ['Far Traveler',	'Insight (Wis), Perception (Wis)',	'Choose 1: musical instrument x1, gaming set x1', '5 gp']
-            ['Feylost',	'Deception (Cha), Survival (Wis)',	'Musical instrument x1',	'8 gp']
-            ['Fisher',	'History (Int), Survival (Wis)',	'None',	'10 gp']
-            ['Folk Hero',	'Animal Handling (Wis), Survival (Wis)',	'Artisans tools x1, vehicles (land)',	'10 gp']
-            ['Gambler',	'Deception (Cha), Insight (Wis)',	'Gaming set x1',	'15 gp']
-            ['Gate Urchin',	'Deception (Cha), Sleight of Hand (Dex)',	'Musical instrument x1, thieves tools',	'10 gp']
-            ['Gate Warden',	'Persuasion (Cha), Survival (Wis)',	'None',	'10 gp']
-            ['Giant Foundling',	'Intimidation (Cha), Survival (Wis)',	'None',	'10 gp']
-            ['Golgari Agent',	'Nature (Int), Survival (Wis)',	'Poisoners Kit',	'10 gp']
-            ['Grinner',	'Deception (Cha), Performance (Cha)',	'Musical instrument x1, thieves tools',	'15 gp']
-            ['Gruul Anarch',	'Animal Handling (Wis), Athletics (Str)', 'None',	'10 gp']
-            ['Guild Artisan	', 'Insight (Wis), Persuasion (Cha)',	'Artisans tools x1',	'15 gp']
-            ['Harborfolk',	'Athletics (Str), Sleight of Hand (Dex)',	'Gaming set x1, vehicles (water)',	'5 gp']
-            ['Haunted One',	'Choose 2: Arcana (Int), Investigation (Int), Religion (Int), Survival (Wis)',	'None',	'1 sp']
-            ['Hermit',	'Medicine (Wis), Religion (Int)',	'Herbalism kit', '5 gp']
-            ['Hillsfar Merchant',	'Insight (Wis), Persuasion (Cha)', 'Vehicles (land), vehicles (water)',	'25 gp']
-            ['Hillsfar Smuggler',	'Perception (Wis), Stealth (Dex)',	'Forgery kit',	'5 gp']
-            ['House Agent',	'Investigation (Int), Persuasion (Cha)',	'none',	'20 gp']
-            ['Inheritor',	'Survival (Wis), and choose 1: Arcana (Int), History (Int), Religion (Int)', 'Gaming set x1, musical instrument x1', '15 gp']
-            ['Initiate',	'Athletics (Str), Intimidation (Cha)',	'Gaming set x1, vehicles (land)', '15 gp']
-            ['Inquisitor',	'Investigation (Int), Religion (Int)',	'Artisans tools x1, thieves tools',	'15 gp']
-            ['Investigator',	'Choose 2: Insight (Wis), Investigation (Int), Perception (Wis)',	'Disguise kit, thieves tools',	'10 gp']
-            ['Iron Route Bandit',	'Animal Handling (Wis), Stealth (Dex)',	'Gaming set x1, vehicles (land)',	'5 gp']
-// unfinished
-            ['Izzet Engineer	GGR	Arcana (Int), Investigation (Int)	Choose 1: Draconic, Goblin, Vedalken	Artisans tools x1	5 gp']
-            ['Knight of the Order	SCAG	Persuasion (Cha), and choose 1: special (see page)	Any x1	Choose 1: gaming set x1, musical instrument x1	10 gp']
-            ['Knight of Solamnia	UA	Athletics (Str), Survival (Wis)	Any x2	None	10 gp']
-            [' Lorehold Student	SCC	History (Int), Religion (Int)	Any x2	None	15 gp']
-            ['Mage of High Sorcery	UA	Arcana (Int), History (Int)	Any x2	None	10 gp']
-            ['Marine	GoS	Athletics (Str), Survival (Wis)	None	Vehicles (water, land)	10 gp']
-            ['Mercenary Veteran	SCAG	Athletics (Str), Persuasion (Cha)	None	Gaming set x1, vehicles (land)	10 gp']
-            ['Mulmaster Aristocrat	EE (AL)	Deception (Cha), Performance (Cha)	None	Artisans tools x1, musical instrument x1	10 gp']
-            ['Noble	PHB	History (Int), Persuasion (Cha)	Any x1	Gaming set x1	25 gp']
-            ['Orzhov Representative	GGR	Intimidation (Cha), Religion (Int)	Any x2	None	1 pp']
-            ['Outlander	PHB	Athletics (Str), Survival (Wis)	Any x1	Musical instrument x1	10 gp']
-            ['Phlan Insurgent	CoS (AL)	Stealth (Dex), Survival (Wis)	None	Artisans tools x1, vehicles (land)	5 gp']
-            ['Phlan Refugee	EE (AL)	Athletics (Str), Insight (Wis)	Any x1	Artisans tools x1	15 gp']
-            ['Plaintiff	AI	Medicine (Wis), Persuasion (Cha)	Any x1	Artisans tools x1	20 gp']
-            ['Planar Philosopher	UA	Arcana (Int), Persuasion (Cha)	Any x2	None	10 gp']
-            ['Prismari Student	SCC	Acrobatics (Dex), Performance (Cha)	Any x1	Choose 1: musical instrument x1, artisans tools x1	10 gp']
-            ['Quandrix Student	SCC	Arcana (Int), Nature (Int)	Any x1	Artisans tools x1	15 gp']
-            ['Rakdos Cultist	GGR	Acrobatics (Dex), Performance (Cha)	Choose 1: Abyssal, Giant	Musical instrument x1	10 gp']
-            ['Rival Intern	AI	History (Int), Investigation (Int)	Any x1	Artisans tools x1	10 gp']
-            ['Rune Carver	UA	History (Int), Perception (Wis)	Giant, Any x1	None	10 gp']
-            ['Sage	PHB	Arcana (Int), History (Int)	Any x2	None	10 gp']
-            ['Sailor	PHB	Athletics (Str), Perception (Wis)	None	Navigators tools, vehicles (water)	10 gp']
-            ['Secret Identity	OotA (AL)	Deception (Cha), Stealth (Dex)	None	Disguise kit, forgery kit	5 gp']
-            ['Selesnya Initiate	GGR	Nature (Int), Persuasion (Cha)	Choose 1: Elvish, Loxodon, Sylvan	Choose 1: artisans tools x1, musical instrument x1	5 gp']
-            ['Shade Fanatic	OotA (AL)	Deception (Cha), Intimidation (Cha)	Netherese	Forgery kit	15 gp']
-            ['Shipwright	GoS	History (Int), Perception (Wis)	None	Carpenters tools, vehicles (water)	10 gp']
-            ['Silverquill Student	SCC	Intimidation (Cha), Persuasion (Cha)	Any x2	None	15 gp']
-            ['Simic Scientist	GGR	Arcana (Int), Medicine (Wis)	Any x2	None	10 gp']
-            ['Smuggler	GoS	Athletics (Str), Deception (Cha)	None	Vehicles (water)	15 gp']
-            ['Soldier	PHB	Athletics (Str), Intimidation (Cha)	None	Gaming set x1, vehicles (land)	10 gp']
-            ['Stojanow Prisoner	CoS (AL)	Deception (Cha), Perception (Wis)	None	Gaming set x1, thieves tools	10 gp']
-            ['Ticklebelly Nomad	CoS (AL)	Animal handling (Wis), Nature (Int)	Giant	Herbalism kit	5 gp']
-            ['Trade Sheriff	OotA (AL)	Investigation (Int), Persuasion (Cha)	Elvish	Thieves tools	17 gp']
-            ['Urban Bounty Hunter	SCAG	Choose 2: Deception (Cha), Insight (Wis), Persuasion (Cha), Stealth (Dex)	None	Choose 2: gaming set x1, musical instrument x1, thieves tools	20 gp']
-            ['Urchin	PHB	Sleight of Hand (Dex), Stealth (Dex)	None	Disguise kit, thieves tools	10 gp']
-            ['Uthgardt Tribe Member	SCAG	Athletics (Str), Survival (Wis)	Any x1	Choose 1: artisans tools x1, musical instrument x1	10 gp']
-            ['Vizier	PSA	History (Int), Religion (Int)	None	Artisans tools x1, musical instrument x1	25 gp']
-            ['Volstrucker Agent	EGtW	Deception (Cha), Stealth (Dex)	None	Poisoners kit	10 gp']
-            ['Waterdhavian Noble	SCAG	History (Int), Persuasion (Cha)	Any x1	Choose 1: gaming set x1, musical instrument x1	20 gp']
-            ['Witchlight Hand	TWBtW	Performance (Cha), Sleight of Hand (Dex)	Any x1	Choose 1: disguise kit, musical instrument x1	8 gp']
-            ['Witherbloom Student	SCC	Nature (Int), Survival (Wis)	Any x1	Herbalism kit	15 gp']
+            ['Anthropologist',	'Insight (Wis), Religion (Int)', 'none', '10 gp'],
+            ['Archaeologist',	'History (Int), Survival (Wis)',	'Any x1	Choose 1: cartographers tools, navigators tools',	'25 gp'],
+            ['Athlete',	'Acrobatics (Dex), Athletics (Str)',	'Any x1	Vehicles (Land)', '10 gp'],
+            ['Azorius Functionary',	'Insight (Wis), Intimidation (Cha)',	'Any x2	None',  '10 gp'],
+            ['Black Fist Double Agent', 'CoS (AL)	Deception (Cha), Insight (Wis)',	'Any X2; Disguise kit, and choose 1: artisans tools x1, gaming set x1',	'15 gp'],
+            ['Boros Legionnaire',	'Athletics (Str), Intimidation (Cha)',	'Choose 1: Celestial, Draconic, Goblin, Minotaur	Choose 1: cartographers tools, navigators tools',	'2 gp'],
+            ['Caravan Specialist',	'Animal Handling (Wis), Survival (Wis)',	'Any x1	Vehicles (land)',	'10 gp'],
+            ['Celebrity Adventurers Scion',	'Perception (Wis), Performance (Cha)',	'Any x2	Disguise kit',	'30 gp'],
+            ['Charlatan',	',Deception (Cha), Sleight of Hand (Dex)',	'Disguise kit, forgery kit',	'15 gp'],
+            ['City Watch',	'Athletics (Str), Insight (Wis)',	'None',	'10 gp'],
+            ['Clan Crafter',	'History (Int), Insight (Wis)',	'Any x1	Artisans tools', '15 gp'],
+            ['Cloistered Scholar',	'History (Int)', 'choose 1: Arcana (Int), Nature (Int), Religion (Int)', '10 gp'],
+            ['Cormanthor Refugee',	'Nature (Int), Survival (Wis)',	'Artisans tools',	'5 gp'],
+            ['Courtier',	'Insight (Wis), Persuasion (Cha)',	'None',	'5 gp'],
+            [' Criminal',	'Deception (Cha), Stealth (Dex)',	'Gaming set x1, thieves tools',	'15 gp'],
+            ['Dimir Operative',	'Deception (Cha), Stealth (Dex)',	'None',	'Special'],
+            ['Dragon Casualty',	'Intimidation (Cha), Survival (Wis)',	'Special (see page)',	'5 gp'],
+            ['Earthspur Miner',	'Athletics (Str), Survival (Wis)',	'None',	'5 gp'],
+            ['Entertainer',	'Acrobatics (Dex), Performance (Cha)',	'Disguise kit, musical instrument x1',	'15 gp'],
+            ['Faceless',	'Deception (Cha), Intimidation (Cha)',	'Disguise kit',	'10 gp'],
+            ['Faction Agent',	'Insight (Wis), and choose 1: special (see page)',	'None',	'15 gp'],
+            ['Failed Merchant',	'Investigation (Int), Persuasion (Cha)', 'Artisans tools x1',	'10 gp'],
+            ['Far Traveler',	'Insight (Wis), Perception (Wis)',	'Choose 1: musical instrument x1, gaming set x1', '5 gp'],
+            ['Feylost',	'Deception (Cha), Survival (Wis)',	'Musical instrument x1',	'8 gp'],
+            ['Fisher',	'History (Int), Survival (Wis)',	'None',	'10 gp'],
+            ['Folk Hero',	'Animal Handling (Wis), Survival (Wis)',	'Artisans tools x1, vehicles (land)',	'10 gp'],
+            ['Gambler',	'Deception (Cha), Insight (Wis)',	'Gaming set x1',	'15 gp'],
+            ['Gate Urchin',	'Deception (Cha), Sleight of Hand (Dex)',	'Musical instrument x1, thieves tools',	'10 gp'],
+            ['Gate Warden',	'Persuasion (Cha), Survival (Wis)',	'None',	'10 gp'],
+            ['Giant Foundling',	'Intimidation (Cha), Survival (Wis)',	'None',	'10 gp'],
+            ['Golgari Agent',	'Nature (Int), Survival (Wis)',	'Poisoners Kit',	'10 gp'],
+            ['Grinner',	'Deception (Cha), Performance (Cha)',	'Musical instrument x1, thieves tools',	'15 gp'],
+            ['Gruul Anarch',	'Animal Handling (Wis), Athletics (Str)', 'None',	'10 gp'],
+            ['Guild Artisan	', 'Insight (Wis), Persuasion (Cha)',	'Artisans tools x1',	'15 gp'],
+            ['Harborfolk',	'Athletics (Str), Sleight of Hand (Dex)',	'Gaming set x1, vehicles (water)',	'5 gp'],
+            ['Haunted One',	'Choose 2: Arcana (Int), Investigation (Int), Religion (Int), Survival (Wis)',	'None',	'1 sp'],
+            ['Hermit',	'Medicine (Wis), Religion (Int)',	'Herbalism kit', '5 gp'],
+            ['Hillsfar Merchant',	'Insight (Wis), Persuasion (Cha)', 'Vehicles (land), vehicles (water)',	'25 gp'],
+            ['Hillsfar Smuggler',	'Perception (Wis), Stealth (Dex)',	'Forgery kit',	'5 gp'],
+            ['House Agent',	'Investigation (Int), Persuasion (Cha)',	'none',	'20 gp'],
+            ['Inheritor',	'Survival (Wis), and choose 1: Arcana (Int), History (Int), Religion (Int)', 'Gaming set x1, musical instrument x1', '15 gp'],
+            ['Initiate',	'Athletics (Str), Intimidation (Cha)',	'Gaming set x1, vehicles (land)', '15 gp'],
+            ['Inquisitor',	'Investigation (Int), Religion (Int)',	'Artisans tools x1, thieves tools',	'15 gp'],
+            ['Investigator',	'Choose 2: Insight (Wis), Investigation (Int), Perception (Wis)',	'Disguise kit, thieves tools',	'10 gp'],
+            ['Iron Route Bandit',	'Animal Handling (Wis), Stealth (Dex)',	'Gaming set x1, vehicles (land)',	'5 gp'],
+            ['Izzet Engineer',	'Arcana (Int), Investigation (Int)', 'Artisans tools x1',	'5 gp'],
+            ['Knight of the Order',	'Persuasion (Cha)', 'Choose 1: gaming set x1, musical instrument', '10 gp'],
+            ['Knight of Solamnia',	'Athletics (Str), Survival (Wis)',	'None',	'10 gp'],
+            ['Lorehold Student',	'History (Int), Religion (Int)', 'None',	'15 gp'],
+            ['Mage of High Sorcery',	'Arcana (Int), History (Int)',	'None',	'10 gp'],
+            ['Marine',	'Athletics (Str), Survival (Wis)',	'Vehicles (water, land)',	'10 gp'],
+            ['Mercenary Veteran',	'Athletics (Str), Persuasion (Cha)',	'Gaming set x1, vehicles (land)',	'10 gp'],
+            ['Mulmaster Aristocrat',	'Deception (Cha), Performance (Cha)',	'Artisans tools x1, musical instrument x1',	'10 gp'],
+            ['Noble',	'History (Int), Persuasion (Cha)',	'Gaming set x1',	'25 gp'],
+            ['Orzhov Representative',	'Intimidation (Cha), Religion (Int)',	'None',	'1 pp']
+            ['Outlander',	'Athletics (Str), Survival (Wis)',	'Any x1	Musical instrument',	'10 gp'],
+            ['Phlan Insurgent',	'Stealth (Dex), Survival (Wis)',	'Artisans tools x1, vehicles (land)',	'5 gp'],
+            ['Phlan Refugee',	'Athletics (Str), Insight (Wis)',	'Artisans tools',	'15 gp'],
+            ['Plaintiff',	'Medicine (Wis), Persuasion (Cha)',	'Artisans tools',	'20 gp'],
+            ['Planar Philosopher',	'Arcana (Int), Persuasion (Cha)',	'None',	'10 gp'],
+            ['Prismari Student',	'Acrobatics (Dex), Performance (Cha)', 'Choose 1: musical instrument x1, artisans tools x1',	'10 gp'],
+            ['Quandrix Student',	'Arcana (Int), Nature (Int)',	'Artisans tools x1',	'15 gp'],
+            ['Rakdos Cultist',	'Acrobatics (Dex), Performance (Cha)',	'Musical instrument x1',	'10 gp'],
+            ['Rival Intern',	'History (Int), Investigation (Int)',	'Artisans tools x1',	'10 gp'],
+            ['Rune Carver', 'History (Int), Perception (Wis)',	'None',	'10 gp'],
+            ['Sage',	'Arcana (Int), History (Int)',	'None',	'10 gp'],
+            ['Sailor',	'Athletics (Str), Perception (Wis)',	'Navigators tools, vehicles (water)',	'10 gp'],
+            ['Secret Identity',	'Deception (Cha), Stealth (Dex)',	'Disguise kit, forgery kit',	'5 gp'],
+            ['Selesnya Initiate',	'Nature (Int), Persuasion (Cha)',	'Choose 1: artisans tools x1, musical instrument x1',	'5 gp'],
+            ['Shade Fanatic',	'Deception (Cha), Intimidation (Cha)',	'Forgery kit',	'15 gp'],
+            ['Shipwright',	'History (Int), Perception (Wis)',	'Carpenters tools, vehicles (water)',	'10 gp'],
+            ['Silverquill', 'Intimidation (Cha), Persuasion (Cha)',	'None',	'15 gp'],
+            ['Simic Scientist',	'Arcana (Int), Medicine (Wis)',	'None',	'10 gp'],
+            ['Smuggler',	'Athletics (Str), Deception (Cha)',	'Vehicles (water)',	'15 gp'],
+            ['Soldier', 'Athletics (Str), Intimidation (Cha)',	'Gaming set x1, vehicles (land)',	'10 gp'],
+            ['Stojanow Prisoner',	'Deception (Cha), Perception (Wis)',	'Gaming set x1, thieves tools',	'10 gp'],
+            ['Ticklebelly Nomad',	'Animal handling (Wis), Nature (Int)',	'Herbalism kit',	'5 gp'],
+            ['Trade Sheriff',	'Investigation (Int), Persuasion (Cha)',	'Thieves tools', '17 gp'],
+            ['Urban Bounty Hunter',	'Choose 2: Deception (Cha), Insight (Wis), Persuasion (Cha), Stealth (Dex)',	'Choose 2: gaming set x1, musical instrument x1, thieves tools',	'20 gp'],
+            ['Urchin',	'Sleight of Hand (Dex), Stealth (Dex)',	'Disguise kit, thieves tools',	'10 gp'],
+            ['Uthgardt Tribe Member',	'Athletics (Str), Survival (Wis)',	'Any x1	Choose 1: artisans tools x1, musical instrument x1',	'10 gp'],
+            ['Vizier',	'History (Int), Religion (Int)',	'Artisans tools x1, musical instrument x1',	'25 gp'],
+            ['Volstrucker Agent',	'Deception (Cha), Stealth (Dex)',	'Poisoners kit',	'10 gp'],
+            ['Waterdhavian Noble',	'History (Int), Persuasion (Cha)',	'Choose 1: gaming set x1, musical instrument x1',	'20 gp'],
+            ['Witchlight Hand',	'Performance (Cha), Sleight of Hand (Dex)',	'Choose 1: disguise kit, musical instrument x1',	'8 gp'],
+            ['Witherbloom Student',	'Nature (Int), Survival (Wis)',	'Any x1	Herbalism kit',	'15 gp'],
 ]
-const hitPointroll = document.getElementById("")
-// if (Options== "Character-inputs"){
-    const CharacterInputs = [
-        {
-        //Character header inputs
-            name: "",
-            level: "",
-            background: "",
-            PlayerName: "",
-            Race: "",
-            Alignment: "",
-            XP: "",
-        //Main Character inputs
-            Procficiency: "",
-            inspiration: false,
-            Strength: "",
-            Dexterity: "",
-            Constitution: "",
-            Intelligence: "",
-            Wisdom: "",
-            Charisma: "",
-        //Hit point and AC stuff
-            ArmorClass: "",
-            Initiative: "",
-            Speed : 30,
-            HitPoints: "",
-        //Attacks and Spells
-            AttackName: "",
-            ATKBonus: "",
-            DamageType: "",
-        }
-    ];
+
 // } else if(Options == "Character-Sheet") {
-    function Character_SHeet(){
-            Main.innerHTML =`
+    // function Character_SHeet(){
+    //         Main.innerHTML =`
            
-            <div id="header-containor"
-                <h4>Dungeons & Dragons</h4>
-                <div id="Character-Name" class="heading">
-                    <h5 id="Character-name"> ${CharacterInputs.name} </h5>
-                </div>
+    //         <div id="header-containor"
+    //             <h4>Dungeons & Dragons</h4>
+    //             <div id="Character-Name" class="heading">
+    //                 <h5 id="Character-name"> ${CharacterInputs.name} </h5>
+    //             </div>
 
-                <div id="basic-info" class="heading">
-                    <p>${CLASS_DATA.class} ${CharacterInputs.level}</p>
-                    <p>${CharacterInputs.background}</p>
-                </div>
-            </div>
+    //             <div id="basic-info" class="heading">
+    //                 <p>${CLASS_DATA.class} ${CharacterInputs.level}</p>
+    //                 <p>${CharacterInputs.background}</p>
+    //             </div>
+    //         </div>
 
-            <div id="Stats">
-                <div id="Proficency-bonus> <h4> ${CharacterInputs.Procficiency} </h4> </div>
-                <div id="Inspiration"> <p>${CharacterInputs.inspiration}</p>
-                <div class="StatPoints"> <h3>${CharacterInputs.Strength}</h3> </div>
-                <div class="StatPoints"> <h3>${CharacterInputs.Dexterity}</h3>  </div>
-                <div class="StatPoints"> <h3>${CharacterInputs.Constitution}</h3>  </div>
-                <div class="StatPoints"> <h3>${CharacterInputs.Intelligence}</h3>  </div>
-                <div class="StatPoints"> <h3>${CharacterInputs.Wisdom}</h3>  </div>
-                <div class="StatPoints"> <h3>${CharacterInputs.Charisma}</h3>  </div>
+    //         <div id="Stats">
+    //             <div id="Proficency-bonus> <h4> ${CharacterInputs.Procficiency} </h4> </div>
+    //             <div id="Inspiration"> <p>${CharacterInputs.inspiration}</p>
+    //             <div class="StatPoints"> <h3>${CharacterInputs.Strength}</h3> </div>
+    //             <div class="StatPoints"> <h3>${CharacterInputs.Dexterity}</h3>  </div>
+    //             <div class="StatPoints"> <h3>${CharacterInputs.Constitution}</h3>  </div>
+    //             <div class="StatPoints"> <h3>${CharacterInputs.Intelligence}</h3>  </div>
+    //             <div class="StatPoints"> <h3>${CharacterInputs.Wisdom}</h3>  </div>
+    //             <div class="StatPoints"> <h3>${CharacterInputs.Charisma}</h3>  </div>
 
-            </div>
+    //         </div>
             
-            `
+    //         `
         
-    }
+    // }
 // };
