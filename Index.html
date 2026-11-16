@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Css.css">
-    <!-- <script src="./db.js" defer></script> -->
-    <script src="./game.js" defer></script>
-    <script src="./check.js" defer></script>
     <title>Dnd Worksite</title>
 </head>
 <body>
@@ -35,8 +32,8 @@
         <input type="text" id="CharacterName">
 
         <h4 class="InputTitle">class</h4>
-        <select for="classSelect" class="form-label" id="classSelect"> 
-            <option>Class Select</option> 
+        <select class="form-label" id="classSelect" required>
+            <option value="" selected disabled>Class Select</option>
         </select>
 
         <select id="SubclassSelect">
@@ -45,6 +42,9 @@
         <p id="subclassDescription"></p>
         <h4 class="InputTitle">Character Level</h4>
         <input id="LV" type="number" min="1" max="20">
+
+        <h3>Class Features</h3>
+        <p id="Features"></p>
 
         <h4 class="InputTitle">Background</h4>
         <select id="backgroundinput">
@@ -76,7 +76,8 @@
         Load character
     </button>
     </div>
-        <button id="CharacterCreatebutton" onclick="Character_SHeet()">Create Character</button>
+        <button id="CharacterCreatebutton" onclick="createCharacterSheet()">Create Character</button>
+        <section id="character-sheet" aria-live="polite"></section>
     </div>
 </body>
 <script src="Characterprofile.js"></script>
@@ -88,8 +89,6 @@
     <script src="https://cdn.jsdelivr.net/npm/random-js@2.1.0/dist/random-js.umd.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@dice-roller/rpg-dice-roller@latest/lib/umd/bundle.min.js"></script>
-    <script src="exprioment/rest.js"></script>
-
 </html>
 
 <!-- https://github.com/Dungeons-Developers/DnD-client -->
