@@ -6,974 +6,1858 @@ const classChoice = document.getElementById("ClassSelect");
 const classSelect = document.getElementById("classSelect");
 const subclassSelect = document.getElementById("SubclassSelect");
 const subclassDescription = document.getElementById("subclassDescription");
-// • 1st Level: Magical Tinkering, Spellcasting, 2 Cantrips Known, 2 1st-level spell slots.
-// • 2nd Level: Infuse Item (learn 4 infusions, have 2 active).
-// • 3rd Level: Artificer Specialist (subclass choice: Alchemist, Armorer, Artillerist, or Battle Smith), The Right Tool for the Job.
-// • 4th Level: Ability Score Improvement (ASI) or Feat.
-// • 5th Level: Subclass feature upgrade (e.g., Extra Attack for Battle Smith/Armorer), access to 2nd-level spells.
-// • 6th Level: Tool Expertise.
-// • 7th Level: Flash of Genius.
-// • 8th Level: Ability Score Improvement (ASI) or Feat.
-// • 9th Level: Subclass feature upgrade, Magic Item Adept.
-// • 10th Level: Magic Item Adept improvement, learn a 3rd cantrip.
-// • 11th Level: Spell-Storing Item.
-// • 12th Level: Ability Score Improvement (ASI) or Feat.
-// • 13th Level: Access to 4th-level spells.
-// • 14th Level: Magic Item Savant, learn a 4th cantrip.
-// • 15th Level: Subclass capstone feature.
-// • 16th Level: Ability Score Improvement (ASI) or Feat.
-// • 17th Level: Access to 5th-level spells.
-// • 18th Level: Magic Item Master.
-// • 19th Level: Ability Score Improvement (ASI) or Feat.
-// • 20th Level: Soul of Artifice (capstone boosting saving throws and preventing death by ending infusions).
-
-const ClassFeatures = document.getElementById("Features"); 
-    const CLASS_DATA = [
-        { 
-            ClassName: "Artificer", 
-            hitDice:8,
-            primaryAttribute:['CON','INT'], 
-            spellAttribute: 'INT', 
-            isHalfCast: true,
-            Features:[
-                    ['LVL 1', 
-                    'At 1st level, youve learned how to invest a spark of magic into mundane objects. To use this ability, you must have thieves tools or artisans tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away. You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long. The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away.A static visual effect appears on one of the objects surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. The chosen property lasts indefinitely. As an action, you can touch the object and end the property early.',
-
-                    'You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies.',
-
-                    'Spellcasting', 
-                    
-                    'Youve studied the workings of magic and how to cast spells, channeling the magic through objects. To observers, you dont appear to be casting spells in a conventional way; you appear to produce wonders from mundane items and outlandish inventions.',
-                    
-                    'Tools Required',
-
-                    'You produce your artificer spell effects through your tools. You must have a spellcasting focus - specifically thieves tools or some kind of artisans tool - in hand when you cast any spell with this Spellcasting feature (meaning the spell has an "M" component when you cast it). You must be proficient with the tool to use it in this way. See the equipment chapter in the Players Handbook for descriptions of these tools.',
-
-
-                    'Cantrips (0-Level Spells)',
-                    
-                    'At 1st level, you know two cantrips of your choice from the artificer spell list. At higher levels, you learn additional artificer cantrips of your choice, as shown in the Cantrips Known column of the Artificer table. When you gain a level in this class, you can replace one of the artificer cantrips you know with another cantrip from the artificer spell list.',
-
-
-                    'Preparing and Casting Spells',
-                    'The Artificer table shows how many spell slots you have to cast your artificer spells. To cast one of your artificer spells of 1st level or higher, you must expend a slot of the spells level or higher. You regain all expended spell slots when you finish a long rest.',
-
-                    'You prepare the list of artificer spells that are available for you to cast, choosing from the artificer spell list. When you do so, choose a number of artificer spells equal to your Intelligence modifier + half your artificer level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots. For example, if you are a 5th-level artificer, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 14, your list of prepared spells can include four spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell Cure Wounds, you can cast it using a lst-level or a 2nd-level slot. Casting the spell doesnt remove it from your list of prepared spells.',
-
-                    'You can change your list of prepared spells when you finish a long rest. Preparing a new list of artificer spells requires time spent tinkering with your spellcasting focuses: at least 1 minute per spell level for each spell on your list.',
-
-                    'Spellcasting Ability',
-                    'Intelligence is your spellcasting ability for your artificer spells; your understanding of the theory behind magic allows you to wield these spells with superior skill. You use your Intelligence whenever an artificer spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for an artificer spell you cast and when making an attack roll with one. Spell save DC = 8 + your proficiency bonus + your Intelligence modifier. Spell attack modifier = your proficiency bonus + your Intelligence modifier'],
-
-                    ['LVL 2', 'Infuse Item',
-                    'At 2nd level, youve gained the ability to imbue mundane items with certain magical infusions, turning those objects into magic items.',
-
-                    'Infusions', 'When you gain this feature, pick four artificer infusions to learn. You learn additional infusions of your choice when you reach certain levels in this class, as shown in the Infusions Known column of the Artificer table. Whenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.',
-
-                    'Infusing an Item',
-                    'Whenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusions description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see the attunement rules in the Dungeon Masters Guide).',
-
-                    'Your infusion remains in an item indefinitely, but when you die, the infusion vanishes after a number of days equal to your Intelligence modifier (minimum of 1 day). The infusion also vanishes if you replace your knowledge of the infusion.',
-
-                    'You can infuse more than one nonmagical object at the end of a long rest; the maximum number of objects appears in the Infused Items column of the Artificer table. You must touch each of the objects, and each of your infusions can be in only one object at a time. Moreover, no object can bear more than one of your infusions at a time. If you try to exceed your maximum number of infusions, the oldest infusion ends, and then the new infusion applies. If an infusion ends on an item that contains other things, like a bag of holding, its contents harmlessly appear in and around its space.'],
-
-                    ['LVL 3', 'SubClass Features'],
-                    ['LVL 4', 'Ability Score Improvemnt or Feat'],
-                    ['LVL 5', 'SubClass Feature'],
-                    ['LVL 6', 'Tool Expertise', 
-                         'At 6th level, your proficiency bonus is now doubled for any ability check you make that uses your proficiency with a   tool.'],
-                    ['LVL 7', 'Flash of Genius',
-                         'At 7th level, youve gained the ability to come up with solutions under pressure. When you or another creature you can see within 30 feet of you makes an ability check or a saving throw, you can use your reaction to add your Intelligence modifier to the roll. You can use this feature a number of times equal to your Intelligence modifier (minimum of once). You regain all expended uses when you finish a long rest.'],
-                    ['LVL 8', 'Ability Score Improvemnt or Feat'],
-                    ['LVL 9', 'SubClass Feature'],
-                    ['LVL 10', 'Magic Item Adept', 
-                        'When you reach 10th level, you achieve a profound understanding of how to use and make magic items: You can attune to up to four magic items at once. If you craft a magic item with a rarity of common or uncommon, it takes you a quarter of the normal time, and it costs you half as much of the usual gold.'],
-                    ['LVL 11', 'At 11th level, you can now store a spell in an object. Whenever you finish a long rest, you can touch one simple or martial weapon or one item that you can use as a spellcasting focus, and you store a spell in it, choosing a 1st- or 2nd-level spell from the artificer spell list that requires 1 action to cast (you neednt have it prepared).',
-                    'While holding the object, a creature can take an action to produce the spells effect from it, using your spellcasting ability modifier. If the spell requires concentration, the creature must concentrate. The spell stays in the object until its been used a number of times equal to twice your Intelligence modifier (minimum of twice) or until you use this feature again to store a spell in an object.'],
-                    ['LVL 12', 'Ability Score Improvemnt or Feat'],
-                    ['LVL 13', 'SubClass Feature'],
-                    ['LVL 14', 'At 14th level, your skill with magic items deepens more: You can attune to up to five magic items at once. You ignore all class, race, spell and level requirements on attuning to or using a magic item.'],
-                    ['LVL 15', 'SubClass Feature'],
-                    ['LVL 16', 'Ability Score Improvemnt or Feat'],
-                    ['LVL 17', 'SubClass Feature'],
-                    ['LVL 18', 'Magic Item Master',
-                        'Starting at 18th level, you can attune up to six magic items at once.'],
-                    ['LVL 19', 'Ability Score Improvemnt or Feat'],
-                    ['LVL 20', 'Soul of Artifice',
-                        'At 20th level, you develop a mystical connection to your magic items, which you can draw on for protection: You gain a +1 bonus to all saving throws per magic item you are currently attuned to. If youre reduced to 0 hit points but not killed out-right, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0.'],
+const ClassFeatures = document.getElementById("Features");
+const CLASS_DATA = [
+  {
+    ClassName: "Artificer",
+    hitDice: 8,
+    primaryAttribute: ["CON", "INT"],
+    spellAttribute: "INT",
+    isHalfCast: true,
+    levels: [
+      {
+        level: 1,
+        features: [
+          {
+            name: "Magical Tinkering",
+            description:
+              "At 1st level, youve learned how to invest a spark of magic into mundane objects. To use this ability, you must have thieves tools or artisans tools in hand. You then touch a Tiny nonmagical object as an action and give it one of the following magical properties of your choice The object sheds bright light in a 5-foot radius and dim light for an additional 5 feet Whenever tapped by a creature, the object emits a recorded message that can be heard up to 10 feet away. You utter the message when you bestow this property on the object, and the recording can be no more than 6 seconds long. The object continuously emits your choice of an odor or a nonverbal sound (wind, waves, chirping, or the like). The chosen phenomenon is perceivable up to 10 feet away.A static visual effect appears on one of the objects surfaces. This effect can be a picture, up to 25 words of text, lines and shapes, or a mixture of these elements, as you like. The chosen property lasts indefinitely. As an action, you can touch the object and end the property early. You can bestow magic on multiple objects, touching one object each time you use this feature, though a single object can only bear one property at a time. The maximum number of objects you can affect with this feature at one time is equal to your Intelligence modifier (minimum of one object). If you try to exceed your maximum, the oldest property immediately ends, and then the new property applies",
+          },
+          {
+            name: "Spellcasting",
+            description:
+              "Spellcasting, Youve studied the workings of magic and how to cast spells, channeling the magic through objects. To observers, you dont appear to be casting spells in a conventional way; you appear to produce wonders from mundane items and outlandish inventionsCantrips (0-Level Spells), At 1st level, you know two cantrips of your choice from the artificer spell list. At higher levels, you learn additional artificer cantrips of your choice, as shown in the Cantrips Known column of the Artificer table. When you gain a level in this class, you can replace one of the artificer cantrips you know with another cantrip from the artificer spell list. Preparing and Casting Spells, The Artificer table shows how many spell slots you have to cast your artificer spells. To cast one of your artificer spells of 1st level or higher, you must expend a slot of the spells level or higher. You regain all expended spell slots when you finish a long rest. You prepare the list of artificer spells that are available for you to cast, choosing from the artificer spell list. When you do so, choose a number of artificer spells equal to your Intelligence modifier + half your artificer level, rounded down (minimum of one spell). The spells must be of a level for which you have spell slots. For example, if you are a 5th-level artificer, you have four 1st-level and two 2nd-level spell slots. With an Intelligence of 14, your list of prepared spells can include four spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell Cure Wounds, you can cast it using a lst-level or a 2nd-level slot. Casting the spell doesnt remove it from your list of prepared spells. Spellcasting Ability, Intelligence is your spellcasting ability for your artificer spells; your understanding of the theory behind magic allows you to wield these spells with superior skill. You use your Intelligence whenever an artificer spell refers to your spellcasting ability. In addition, you use your Intelligence modifier when setting the saving throw DC for an artificer spell you cast and when making an attack roll with one. Spell save DC = 8 + your proficiency bonus + your Intelligence modifier. Spell attack modifier = your proficiency bonus + your Intelligence modifier",
+          },
+        ],
+      },
+      {
+        level: 2,
+        features: [
+          {
+            name: "Infuse Item",
+            description:
+              "At 2nd level, youve gained the ability to imbue mundane items with certain magical infusions, turning those objects into magic items.",
+            details: [
+              {
+                name: "Infusions",
+                description:
+                  "When you gain this feature, pick four artificer infusions to learn. You learn additional infusions of your choice when you reach certain levels in this class, as shown in the Infusions Known column of the Artificer table. Whenever you gain a level in this class, you can replace one of the artificer infusions you learned with a new one.",
+              },
+              {
+                name: "Infusing an Item",
+                description:
+                  "Whenever you finish a long rest, you can touch a nonmagical object and imbue it with one of your artificer infusions, turning it into a magic item. An infusion works on only certain kinds of objects, as specified in the infusions description. If the item requires attunement, you can attune yourself to it the instant you infuse the item. If you decide to attune to the item later, you must do so using the normal process for attunement (see the attunement rules in the Dungeon Masters Guide)",
+              },
             ],
-            subClass:[
-                    ['Alchemist', 'An Alchemist is an expert at combining reagents to produce magical effects. Alchemists use their creations to give life and to leech it away.',  
-                            'LVL 3: Tools of the trade: you gain the following benfits. Tool Proficency you gain Profiency with alchemists Supplies and the Herbilism kit. If you already have one of these proficencies you gain one of the Beginning at 3rd level, whenever you finish a long rest, you can magically produce an experimental elixir in an empty flask you touch. Roll on the Experimental Elixir table for the elixirs effect, which is triggered when someone drinks the elixir. As an action, a creature can drink the elixir or administer it to an incapacitated creature.You can create additional experimental elixirs by expending a spell slot of 1st level or higher for each one. When you do so, you use your action to create the elixir in an empty flask you touch, and you choose the elixirs effect from the Experimental Elixir table.Creating an experimental elixir requires you to have alchemist supplies on your person, and any elixir you create with this feature lasts until it is drunk or until the end of your next long rest.When you reach certain levels in this class, you can make more elixirs at the end of a long rest: two at 6th level and three at 15th level. Roll for each elixirs effect separately. Each elixir requires its own flask. Effects 1D6: 1: (Healing. The drinker regains a number of hit points equal to 2d4 + your Intelligence Modifier), 2; (Swiftness. The drinkers walking speed increases by 10 feet for 1 hour.) 3: (Resilience. The drinker gains a +1 bonus to AC for 10 minutes.), 4:(Boldness. The drinker can roll a d4 and add the number rolled to every attack roll and saving throw they make for the next minute.), 5: (Flight. The drinker gains a flying speed of 10 feet for 10 minutes.) 6: (Transformation. The drinkers body is transformed as if by the Alter Self spell. The drinker determines the transformation caused by the spell, the effects of which last for 10 minutes.)', 
-                            'LVL 5: Alchemical Savant At 5th level, youve developed masterful command of magical chemicals, enhancing the healing and damage you create through them. Whenever you cast a spell using your alchemists supplies as the spellcasting focus, you gain a bonus to one roll of the spell. That roll must restore hit points or be a damage roll that deals acid, fire, necrotic, or poison damage, and the bonus equals your Intelligence modifier (minimum of +1).',
-                            'LVL 9: Restorative Reagents Starting at 9th level, you can incorporate restorative reagents into some of your works: Whenever a creature drinks an experimental elixir you created, the creature gains temporary hit points equal to 2d6 + your Intelligence modifier (minimum of 1 temporary hit point). You can cast Lesser Restoration without expending a spell slot and without preparing the spell, provided you use alchemists supplies as the spellcasting focus. You can do so a number of times equal to your Intelligence modifier (minimum of once), and you regain all expended uses when you finish a long rest.',
-                            'LVL 15: Chemical Mastery: By 15th level, you have been exposed to so many chemicals that they pose little risk to you, and you can use them to quickly end certain ailments: You gain resistance to acid damage and poison damage, and you are now immune to the poisoned condition. You can cast Greater Restoration and Heal without expending a spell slot, without preparing the spell, and without providing the material component, provided you use alchemist’s supplies as the spellcasting focus. Once you cast either spell with this feature, you cant cast that spell with it again until you finish a long rest.'
-                        ],
-                    ['Armorer', 'An artificer who specializes as an Armorer modifies armor to function almost like a second skin. The armor is enhanced to hone the artificers magic, unleash potent attacks, and generate a formidable defense. The artificer bonds with this armor, becoming one with it even as they experiment with it and refine its magical capabilities.',
-                            'LVL 3: Arcane Armor: Beginning at 3rd level, your metallurgical pursuits have led to you making armor a conduit for your magic. As an action, you can turn a suit of armor you are wearing into Arcane Armor, provided you have smiths tools in hand.You gain the following benefits while wearing this armor: If the armor normally has a Strength requirement, the arcane armor lacks this requirement for you. You can use the arcane armor as a spellcasting focus for your artificer spells. The armor attaches to you and can’t be removed against your will. It also expands to cover your entire body, although you can retract or deploy the helmet as a bonus action. The armor replaces any missing limbs, functioning identically to a body part it is replacing. You can doff or don the armor as an action.The armor continues to be Arcane Armor until you don another suit of armor or you die.',
-                            'LVL 3: Armor Model: Beginning at 3rd level, you can customize your Arcane Armor. When you do so, choose one of the following armor models: Guardian or Infiltrator. The model you choose gives you special benefits while you wear it. Each model includes a special weapon. When you attack with that weapon, you can add your Intelligence modifier, instead of Strength or Dexterity, to the attack and damage rolls. You can change the armors model whenever you finish a short or long rest, provided you have smiths tools in hand. Guardian: You design your armor to be in the front line of conflict. It has the following features: Thunder Gauntlets. Each of the armors gauntlets counts as a simple melee weapon while you arent holding anything in it, and it deals 1d8 thunder damage on a hit. A creature hit by the gauntlet has disadvantage on attack rolls against targets other than you until the start of your next turn, as the armor magically emits a distracting pulse when the creature attacks someone else. Defensive Field. As a bonus action, you can gain temporary hit points equal to your level in this class, replacing any temporary hit points you already have. You lose these temporary hit points if you doff the armor. You can use this bonus action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest. Infiltrator. You customize your armor for subtle undertakings. It has the following features: Lightning Launcher. A gemlike node appears on one of your armored fists or on the chest (your choice). It counts as a simple ranged weapon, with a normal range of 90 feet and a long range of 300 feet, and it deals 1d6 lightning damage on a hit. Once on each of your turns when you hit a creature with it, you can deal an extra 1d6 lightning damage to that target. Powered Steps. Your walking speed increases by 5 feet. Dampening Field. You have advantage on Dexterity (Stealth) checks. If the armor normally imposes disadvantage on such checks, the advantage and disadvantage cancel each other, as normal.',
-                            'LVL 5: Extra Attack:  Starting at 5th level, you can attack twice, rather than once, whenever you take the Attack action on your turn'
-                            'LVL 9: Armor Modifications: At 9th level, you learn how to use your artificer infusions to specially modify your Arcane Armor. That armor now counts as separate items for the purposes of your Infuse Items feature: armor (the chest piece), boots, helmet, and the armors special weapon. Each of those items can bear one of your infusions, and the infusions transfer over if you change your armors model with the Armor Model feature. In addition, the maximum number of items you can infuse at once increases by 2, but those extra items must be part of your Arcane Armor.'
-                            'LVL 15: Perfected Armor, At 15th level, your Arcane Armor gains additional benefits based on its model, as shown below. Guardian. When a Huge or smaller creature you can see ends its turn within 30 feet of you, you can use your reaction to magically force it to make a Strength saving throw against your spell save DC. On a failed save, you pull the creature up to 25 feet directly to an unoccupied space. If you pull the target to a space within 5 feet of you, you can make a melee weapon attack against it as part of this reaction. You can use this reaction a number of times equal to your proficiency bonus, and you regain all expended uses of it when you finish a long rest. Infiltrator. Any creature that takes lightning damage from your Lightning Launcher glimmers with magical light until the start of your next turn. The glimmering creature sheds dim light in a 5-foot radius, and it has disadvantage on attack rolls against you, as the light jolts it if it attacks you. In addition, the next attack roll against it has advantage, and if that attack hits, the target takes an extra 1d6 lightning damage.'
-                        ],
-                    ['Artillerist', 'An Artillerist specializes in using magic t o hurl energy, projectiles, and explosions on a battlefield. This destructive power was valued by all the armies of the Last War. Now that the war is over, some members of this specialization have sought to build a more peaceful world by using their powers to fight the resurgence of strife in Khorvaire. The gnome artificer Vi, an unlikely yet key member of House Canniths warforged project, has been especially vocal about making things right: "Its about time we fixed things instead of blowing them all to hell."'
-                        'LVL 3: Eldritch Cannon Also at 3rd level, youve learned how to create a magical cannon. Using woodcarvers tools or smiths tools, you can take an action to magically create a Small or Tiny eldritch cannon in an unoccupied space on a horizontal surface within 5 feet of you. A Small eldritch cannon occupies its space, and a Tiny one can be held in one hand. Once you create a cannon, you cant do so again until you finish a long rest or until you expend a spell slot to create one. You can have only one cannon at a time and cant create one while your cannon is present. The cannon is a magical object. Regardless of size, the cannon has an AC of 18 and a number of hit points equal to five times your artificer level. It is immune to poison damage and psychic damage. If it is forced to make an ability check or a saving throw, treat all its ability scores as 10 (+0). If the mending spell is cast on it, it regains 2d6 hit points. It disappears if it is reduced to 0 hit points or after 1 hour. You can dismiss it early as an action. When you create the cannon, you determine its appearance and whether it has legs. You also decide which type it is, choosing from the options on the Eldritch Cannons table. On each of your turns, you can take a bonus action to cause the cannon to activate if you are within 60 feet of it. As part of the same bonus action, you can direct the cannon to walk or climb up to 15 feet to an unoccupied space, provided it has legs. Flamethrower	The cannon exhales fire in an adjacent 15-foot cone that you designate. Each creature in that area must make a Dexterity saving throw against your spell save DC, taking 2d8 fire damage on a failed save or half as much damage on a successful one. The fire ignites any flammable objects in the area that arent being worn or carried. Force Ballista:	Make a ranged spell attack, originating from the cannon, at one creature or object within 120 feet of it. On a hit, the target takes 2d8 force damage, and if the target is a creature, it is pushed up to 5 feet away from the cannon. Protector:	The cannon emits a burst of positive energy that grants itself and each creature of your choice within 10 feet of it a number of temporary hit points equal to 1d8 + your Intelligence modifier (minimum of +1).',
-                        'LVL 5: Arcane Firearm At 5th level, You know how to turn a wand, staff, or rod into an arcane firearm, a conduit for your destructive spells. When you finish a long rest, you can use woodcarvers tools to carve special sigils into a wand, staff, or rod and thereby turn it into your arcane firearm. The sigils disappear from the object if you later carve them on a different item. The sigils otherwise last indefinitely. You can use your arcane firearm as a spellcasting focus for your artificer spells. When you cast an artificer spell through the firearm, roll a d8, and you gain a bonus to one of the spells damage rolls equal to the number rolled.',
-                        'LVL 9: Explosive Cannon; Starting at 9th level, every eldritch cannon you create is more destructive: The cannons damage rolls all increase by 1d8. As an action, you can command the cannon to detonate if you are within 60 feet of it. Doing so destroys the cannon and forces each creature within 20 feet of it to make a Dexterity saving throw against your spell save DC, taking 3d8 force damage on a failed save or half as much damage on a successful one.',
-                        'LVL 15: Fortified Position By 15th level, you’re a master at forming well-defended emplacements using Eldritch Cannon: You and your allies have half cover while within 10 feet of a cannon you create with Eldritch Cannon, as a result of a shimmering field of magical protection that the cannon emits. You can now have two cannons at the same time. You can create two with the same action (but not the same spell slot), and you can activate both of them with the same bonus action. You determine whether the cannons are identical to each other or different. You cant create a third cannon while you have two.',
-                    ],
-                    ['BattleSmith', 'Battle-Ready: INT for weapon attacks. Steel Defender: loyal mechanical pet that fights for you. Extra Attack at 5th.'
-                        'LVL 3: Battle Ready; When you reach 3rd level, your combat training and your experiments with magic have paid off in two ways: You gain proficiency with martial weapons. When you attack with a magic weapon, you can use your Intelligence modifier, instead of Strength or Dexterity modifier, for the attack and damage rolls. Steel Defender: By 3rd level, your tinkering has borne you a faithful companion, a steel defender. Its friendly to you and your companions, and it obeys your commands. See its game statistics in the Steel Defender stat block, which uses your proficiency bonus (PB) in several places. You determine the creatures appearance and whether it has two legs or four; your choice has no effect on its game statistics. In combat, the defender shares your initiative count, but it takes its turn immediately after yours. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to command it to take another action. That action can be one in its stat block or some other action. If you are incapacitated, the defender can take any action of its choice, not just Dodge. If the Mending spell is cast on it, it regains 2d6 hit points. If it has died within the last hour, you can use your smiths tools as an action to revive it, provided you are within 5 feet of it and you expend a spell slot of 1st level or higher. The steel defender returns to life after 1 minute with all its hit points restored. At the end of a long rest, you can create a new steel defender if you have smiths tools with you. If you already have a defender from this feature, the first one immediately perishes. The defender also perishes if you die.',
-                        'LVL 5: Extra Attack: Starting at 5th level, you can attack twice, rather than once, whenever you take the Attack action on your turn.',
-                        'LVL 9: Arcane Jolt; At 9th level, youve learned new ways to channel arcane energy to harm or heal. When either you hit a target with a magic weapon attack or your steel defender hits a target, you can channel magical energy through the strike to create one of the following effects: The target takes an extra 2d6 force damage. Choose one creature or object you can see within 30 feet of the target. Healing energy flows into the chosen recipient, restoring 2d6 hit points to it. You can use this energy a number of times equal to your Intelligence modifier (minimum of once), but you can do so no more than once on a turn. You regain all expended uses when you finish a long rest.',
-                        'LVL 15: Improved Defender; At 15th level, your Arcane Jolt and steel defender become more powerful:The extra damage and the healing of your Arcane Jolt both increase to 4d6. Your steel defender gains a +2 bonus to Armor Class. Whenever your steel defender uses its Deflect Attack, the attacker takes force damage equal to 1d4 + your Intelligence modifier.'
-
-                        'Steel Defender, Medium construct, Armor Class: 15 (natural armor) Hit Points: 2 + your Intelligence modifier + 5 times your artificer level (the defender has a number of Hit Dice [d8s] equal to your artificer level)Speed: 40 ft.STR{14 (+2)}, DEX{12 (+1)}, CON{14 (+2)},	INT{4 (−3)}, WIS {10 (+0)},	CHA	{6 (−2)}, Saving Throws: Dex +1 plus PB, Con +2 plus PB, Skills: Athletics +2 plus PB, Perception +0 plus PB x 2, Damage Immunities: poison, Condition Immunities: charmed, exhaustion, poisoned, Senses: darkvision 60 ft., passive Perception 10 + (PB x 2), Languages: understands the languages you speak, Proficiency Bonus (PB): equals your bonus, Vigilant. The defender cant be surprised. Actions: Force-Empowered Rend. Melee Weapon Attack: your spell attack modifier to hit, reach 5 ft., one target you can see. Hit: 1d8 + PB force damage. Repair (3/Day). The magical mechanisms inside the defender restore 2d8 + PB hit points to itself or to one construct or object within 5 feet of it. Reactions:  Deflect Attack. The defender imposes disadvantage on the attack roll of one creature it can see that is within 5 feet of it, provided the attack roll is against a creature other than the defender. '
-                    ],
-                    ['Cartographer', 'Map Mastery: advantage on Navigation checks. Territorial Awareness: bonus action to mark an area, granting allies +1 AC and primaryAttribute while in it. At higher levels, create Cartographic Traps and Shortcut routes.',
-                        'LVL 3: Level 3: Adventurers Atlas; Whenever you finish a Long Rest while holding Cartographer’s Tools, you can use that tool to create a set of magical maps by touching at least two creatures (one of whom can be yourself), up to a maximum number of creatures equal to 1 plus your Intelligence modifier (minimum of two creatures). Each target receives a magical map, which constantly updates to show the relative position of all the map holders but is illegible to all others. The maps last until you die or until you use this feature again, at which point any existing maps created by this feature immediately vanish. While carrying the map, a target gains the following benefits. Awareness. The target adds 1d4 to its Initiative rolls. Positioning. The target knows the location of all other map holders that are on the same plane of existence as itself. When casting a spell or creating another effect that requires being able to see the effect’s target, a map holder can target another map holder regardless of sight or cover, so long as the other map holder is still within the effect’s range. Level 3: Mapping Magic: You gain the following benefits; Illuminated Cartography. You can cast Faerie Fire without expending a spell slot, outlining the affected creatures as if in ink. You can do so a number of times equal to your Intelligence modifier (minimum of once), and you regain all expended uses when you finish a Long Rest. Portal Jump. On your turn, you can spend an amount of movement equal to half your Speed (round down) to teleport to an unoccupied space you can see within 10 feet of yourself or within 5 feet of a creature that is within 30 feet of you and holding one of your Adventurer’s Atlas maps. You can’t use this benefit if your Speed is 0.',
-                        'LVL 5: Guided Precision: Once per turn, whenever you cast a spell from your Cartographer Spells list or hit a creature affected by your Faerie Fire with an attack roll, you can add your Intelligence modifier to one damage roll of the spell or attack. In addition, taking damage can’t cause you to lose Concentration on Faerie Fire.',
-                        'LVL 9: Ingenious Movement When you use your Flash of Genius, you or a willing creature of your choice that you can see within 30 feet of yourself can teleport up to 30 feet to an unoccupied space you can see as part of that same Reaction.',
-                        'LVL 15: Superior Atlas Your Adventurer’s Atlas improves, gaining the following benefits; Safe Haven. When a map holder would be reduced to 0 Hit Points but not killed outright, that creature can destroy its map. The creature’s Hit Points instead change to a number equal to twice your Artificer level, and the creature is teleported to an unoccupied space within 5 feet of you or another map holder of its choice. Unerring Path. If you are one of the map holders for your Adventurer’s Atlas, you can cast Find the Path without expending a spell slot, without preparing the spell, and without needing spell components. Once you use this benefit, you can’t use it again until you finish a Long Rest.'
-                    ],
-            ]
-        },
-  { 
-            ClassName: "Barbarian",
-            hitDice:12, 
-            primaryAttribute:"STR,CON", 
-            spellAttribute:null,
-            Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-            subClass:[  
-                    ['Path of the Berserker', 'official', 'Frenzy: bonus action unarmed strike while raging. Mindless Rage: immune to charm/fright while raging. Retaliation: reaction attack when hit.'],
-                    ['Path of the Totem Warrior', 'official', 'Totem Spirit: Bear (resistance to all dmg), Eagle (no OA), Wolf (allies adv vs enemies near you). Totem bonuses scale.'],
-                    ['Path of the Ancestral Guardian','official', 'Barbarians who draw on their ancestral guardians can better fight to protect their tribes and their allies. In order to cement ties to their ancestral guardians, barbarians who follow this path cover themselves in elaborate tattoos that celebrate their ancestors’ deeds. These tattoos tell sagas of victories against terrible monsters and other fearsome rivals.'],
-                    ['Path of the Battlerager', 'official', 'Spiked armor deals damage on grapple. Reckless Abandon adds temp HP on Reckless Attack. Requires Dwarf.'],
-                    ['Path of the Storm Herald', 'official', 'Aura of lightning, fire, or cold. Desert: fire damage; Sea: lightning; Tundra: temp HP to allies.'],
-                    ['Path of the Zealot',  'official',    'Divine Fury: extra radiant/necrotic damage. Warrior of the Gods: resurrection spells use no material components. Rage at death.'],
-                    ['Path of the Beast',   'official',    'Beast Aspect: claws, bite, or tail. Bestial Soul: swim/climb speed or jump. Call the Hunt: allies gain temp HP.'],
-                    ['Path of Wild Magic',  'official',    'Wild Surge: random magical effects when raging. Magic Awareness: detect spells. Unstable Backlash: redirect damage to Wild Surge.'],
-                    ['Path of the Juggernaut',  'Homebrew', 'Unstoppable: cannot be knocked prone while raging. Pulverizing Blow: knock enemies back 15ft on hit. Overwhelming Cleave: attack multiple creatures in a line. Juggernaut\'s Rush: charge through enemies.'],
-                    ['Path of the Dragon',      'Homebrew', 'Draconic Rage: breath weapon during rage, choose damage type. Dragon Hide: natural AC. Frightful Presence: frighten enemies on rage entry. Wings at 14th level.'],
-                ]
+          },
+        ],
+      },
+      {
+        level: 3,
+        features: [
+          {
+            name: "Subclass Feature",
+            description: "Choose your Artificer specialization.",
+          },
+        ],
+      },
+      {
+        level: 4,
+        features: [
+          {
+            name: "Ability Score Improvement or Feat",
+            description: "",
+          },
+        ],
+      },
+      {
+        level: 5,
+        features: [
+          {
+            name: "Subclass Feature",
+            description: "",
+          },
+        ],
+      },
+      {
+        level: 6,
+        features: [
+          {
+            name: "Tool Expertise",
+            description:
+              "Your proficiency bonus is doubled for any ability check you make that uses your proficiency with a tool.",
+          },
+        ],
+      },
+      {
+        level: 7,
+        features: [
+          {
+            name: "Flash of Genius",
+            description:
+              "When you or another creature you can see within 30 feet makes an ability check or saving throw, you can use your reaction to add your Intelligence modifier.",
+          },
+        ],
+      },
+    ],
+    subClass: [
+      {
+        SubName: "Alchemist",
+        origin: "official",
+        description: "An Alchemist is an expert at combining reagents to produce magical effects.",
+        LVL3: "",
+        LVL5: "",
+        LVL9: "",
+        LVL15: "",
+      },
+      {
+        SubName: "Artilerist",
+        origin: "official",
+        description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
+        LVL3: "",
+        LVL5: "",
+        LVL9: "",
+        LVL15: "",
+      },
+      {
+        SubName: "Armorer",
+        origin: "official",
+        description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
+        LVL3: "",
+        LVL5: "",
+        LVL9: "",
+        LVL15: "",
+    },
+    {
+        SubName: "Armorer",
+        origin: "official",
+        description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
+        LVL3: "",
+        LVL5: "",
+        LVL9: "",
+        LVL15: "",
+    },
+    {
+        SubName: "Armorer",
+        origin: "official",
+        description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
+        LVL3: "",
+        LVL5: "",
+        LVL9: "",
+        LVL15: "",
+    },
+    ],
   },
-  { 
-   ClassName: "Bard", 
-    hitDice:8, 
-    primaryAttribute:['DEX','CHA'], 
-    spellAttribute:'CHA',
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['College of Lore',      'official',   'Bonus Proficiencies (3 skills). Cutting Words: reduce enemy attack/check with Bardic Inspiration. Magical Secrets (6th instead of 10th). Peerless Skill.'],
-            ['College of Valor',     'official',   'Bonus Proficiencies: medium armor, shields, martial weapons. Combat Inspiration: Bardic die to damage/AC. Extra Attack at 6th.'],
-            ['College of Glamour',   'official',   'Mantle of Inspiration: temp HP + free move to allies. Enthralling Performance: charm crowd. Mantle of Majesty: command as bonus action for 1 min.'],
-            ['College of Swords',    'official',   'Bonus Proficiency: medium armor, scimitars. Blade Flourish: Defensive, Slashing, Mobile flourishes using Bardic die. Extra Attack.'],
-            ['College of Eloquence', 'official',   'Silver Tongue: min 10 on Persuasion/Deception. Unsettling Words: reduce target save. Infectious Inspiration: refund Bardic die when it helps.'],
-            ['College of Creation',  'official',   'Mote of Potential: extra effects when Bardic die used. Performance of Creation: create large nonmagical object. Animating Performance: animated objects.'],
-            ['College of Spirits',   'official',   'Guiding Whispers: spare the dying cantrip. Spiritual Focus: bonus to spell damage. Tales from Beyond: d6 table random spirit powers.'],
-            ['College of Whispers',  'official',   'Psychic Blades: extra psychic damage with Bardic die. Words of Terror: frighten targets. Mantle of Whispers: steal identity of slain humanoid.'],
-            ['College of Tragedy',   'official',   'Bonus Proficiency: Performance. Subtle Magic: illusion/enchantment spells ignore resistances. Bewitching Performance: charm on performance. Tragic Inspiration: Bardic die to ability checks.'],
-            ['College of the Moon',  'official',   'Bonus Proficiency: Performance. Moonlit Shroud: illusion spells ignore invisibility. Lunar Inspiration: Bardic die to damage or healing. Unfathomable Inspiration: Bardic die can be used on death saving throws.'],
-            ['College of Tragedy',   'Homebrew',   ' Poetry in Misery: regain Bardic Inspiration when ally fails a check. Sorrowful Fate: impose disadvantage on a death save. Tale of Hubris: exploit enemy crits. Inevitable Demise: escalating damage on cursed targets.'],
-        ]
+  {
+    ClassName: "Barbarian",
+    hitDice: 12,
+    primaryAttribute: "STR,CON",
+    spellAttribute: null,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Path of the Berserker",
+        "official",
+        "Frenzy: bonus action unarmed strike while raging. Mindless Rage: immune to charm/fright while raging. Retaliation: reaction attack when hit.",
+      ],
+      [
+        "Path of the Totem Warrior",
+        "official",
+        "Totem Spirit: Bear (resistance to all dmg), Eagle (no OA), Wolf (allies adv vs enemies near you). Totem bonuses scale.",
+      ],
+      [
+        "Path of the Ancestral Guardian",
+        "official",
+        "Barbarians who draw on their ancestral guardians can better fight to protect their tribes and their allies. In order to cement ties to their ancestral guardians, barbarians who follow this path cover themselves in elaborate tattoos that celebrate their ancestors’ deeds. These tattoos tell sagas of victories against terrible monsters and other fearsome rivals.",
+      ],
+      [
+        "Path of the Battlerager",
+        "official",
+        "Spiked armor deals damage on grapple. Reckless Abandon adds temp HP on Reckless Attack. Requires Dwarf.",
+      ],
+      [
+        "Path of the Storm Herald",
+        "official",
+        "Aura of lightning, fire, or cold. Desert: fire damage; Sea: lightning; Tundra: temp HP to allies.",
+      ],
+      [
+        "Path of the Zealot",
+        "official",
+        "Divine Fury: extra radiant/necrotic damage. Warrior of the Gods: resurrection spells use no material components. Rage at death.",
+      ],
+      [
+        "Path of the Beast",
+        "official",
+        "Beast Aspect: claws, bite, or tail. Bestial Soul: swim/climb speed or jump. Call the Hunt: allies gain temp HP.",
+      ],
+      [
+        "Path of Wild Magic",
+        "official",
+        "Wild Surge: random magical effects when raging. Magic Awareness: detect spells. Unstable Backlash: redirect damage to Wild Surge.",
+      ],
+      [
+        "Path of the Juggernaut",
+        "Homebrew",
+        "Unstoppable: cannot be knocked prone while raging. Pulverizing Blow: knock enemies back 15ft on hit. Overwhelming Cleave: attack multiple creatures in a line. Juggernaut's Rush: charge through enemies.",
+      ],
+      [
+        "Path of the Dragon",
+        "Homebrew",
+        "Draconic Rage: breath weapon during rage, choose damage type. Dragon Hide: natural AC. Frightful Presence: frighten enemies on rage entry. Wings at 14th level.",
+      ],
+    ],
   },
-   { 
-    ClassName:"Cleric",
-    hitDice:8, 
-    primaryAttribute:['WIS','CHA'], 
-    spellAttribute:'WIS',
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Life Domain',        'official',      'Bonus: heavy armor. Disciple of Life: heals restore extra 2+spell level HP. Preserve Life: channel to spread HP among allies.'],
-            ['Light Domain',       'official',      'Bonus: light cantrip. Warding Flare: impose disadvantage on attacker. Radiance of the Dawn: channel to deal radiant and dispel darkness.'],
-            ['Trickery Domain',    'official',      'Blessing of the Trickster: adv Stealth. Invoke Duplicity: create illusion duplicate. Cloak of Shadows: become invisible.'],
-            ['Knowledge Domain',   'official',       'Blessings of Knowledge: 2 languages, 2 skill proficiencies with expertise. Read Thoughts: channel to read minds. Visions of the Past.'],
-            ['War Domain',         'official',       'Bonus: heavy armor, martial weapons. War Priest: weapon attack as bonus action. Guided Strike: channel for +10 to hit.'],
-            ['Nature Domain',      'official',      'Bonus: heavy armor, 1 druid cantrip. Dampen Elements: reduce elemental damage to ally. Master of Nature: command charmed animals/plants.'],
-            ['Tempest Domain',     'official',      'Bonus: heavy armor, martial weapons. Wrath of the Storm: reaction lightning/thunder. Destructive Wrath: maximize thunder/lightning damage.'],
-            ['Death Domain',       'official',      'Bonus: martial weapons. Reaper: cantrips hit two targets. Touch of Death: add necrotic damage on kills. Inescapable Destruction: ignore necrotic resistance.'],
-            ['Forge Domain',       'official',     'Bonus: heavy armor, smith tools. Artisan\'s Blessing: create metal items. Blessing of the Forge: give item +1 AC or +1 attack.'],
-            ['Grave Domain',       'official',     'Circle of Mortality: maximize dice on 0 HP healing. Eyes of the Grave: sense undead. Sentinel at Death\'s Door: cancel crits. Keeper of Souls.'],
-            ['Order Domain',       'official',      'Bonus: heavy armor. Voice of Authority: allies attack after you heal them. Order\'s Demand: channel to charm creatures.'],
-            ['Peace Domain',       'official',     'Implement of Peace: proficiency in Insight/Performance/Persuasion. Emboldening Bond: bonded allies can add d4 to checks. Balm of Peace.'],
-            ['Twilight Domain',    'official',     'Bonus: heavy armor, martial weapons. Eyes of Night: darkvision 300ft, share with allies. Twilight Sanctuary: aura of protection (temp HP or end charm/fear).'],
-            ['Arcana Domain',      'official',   'Arcane Initiate: two wizard cantrips. Spell Breaker: dispel lower-level spells when healing. Arcane Mastery: add high-level wizard spells to list.'],
-        ]
+  {
+    ClassName: "Bard",
+    hitDice: 8,
+    primaryAttribute: ["DEX", "CHA"],
+    spellAttribute: "CHA",
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "College of Lore",
+        "official",
+        "Bonus Proficiencies (3 skills). Cutting Words: reduce enemy attack/check with Bardic Inspiration. Magical Secrets (6th instead of 10th). Peerless Skill.",
+      ],
+      [
+        "College of Valor",
+        "official",
+        "Bonus Proficiencies: medium armor, shields, martial weapons. Combat Inspiration: Bardic die to damage/AC. Extra Attack at 6th.",
+      ],
+      [
+        "College of Glamour",
+        "official",
+        "Mantle of Inspiration: temp HP + free move to allies. Enthralling Performance: charm crowd. Mantle of Majesty: command as bonus action for 1 min.",
+      ],
+      [
+        "College of Swords",
+        "official",
+        "Bonus Proficiency: medium armor, scimitars. Blade Flourish: Defensive, Slashing, Mobile flourishes using Bardic die. Extra Attack.",
+      ],
+      [
+        "College of Eloquence",
+        "official",
+        "Silver Tongue: min 10 on Persuasion/Deception. Unsettling Words: reduce target save. Infectious Inspiration: refund Bardic die when it helps.",
+      ],
+      [
+        "College of Creation",
+        "official",
+        "Mote of Potential: extra effects when Bardic die used. Performance of Creation: create large nonmagical object. Animating Performance: animated objects.",
+      ],
+      [
+        "College of Spirits",
+        "official",
+        "Guiding Whispers: spare the dying cantrip. Spiritual Focus: bonus to spell damage. Tales from Beyond: d6 table random spirit powers.",
+      ],
+      [
+        "College of Whispers",
+        "official",
+        "Psychic Blades: extra psychic damage with Bardic die. Words of Terror: frighten targets. Mantle of Whispers: steal identity of slain humanoid.",
+      ],
+      [
+        "College of Tragedy",
+        "official",
+        "Bonus Proficiency: Performance. Subtle Magic: illusion/enchantment spells ignore resistances. Bewitching Performance: charm on performance. Tragic Inspiration: Bardic die to ability checks.",
+      ],
+      [
+        "College of the Moon",
+        "official",
+        "Bonus Proficiency: Performance. Moonlit Shroud: illusion spells ignore invisibility. Lunar Inspiration: Bardic die to damage or healing. Unfathomable Inspiration: Bardic die can be used on death saving throws.",
+      ],
+      [
+        "College of Tragedy",
+        "Homebrew",
+        " Poetry in Misery: regain Bardic Inspiration when ally fails a check. Sorrowful Fate: impose disadvantage on a death save. Tale of Hubris: exploit enemy crits. Inevitable Demise: escalating damage on cursed targets.",
+      ],
+    ],
+  },
+  {
+    ClassName: "Cleric",
+    hitDice: 8,
+    primaryAttribute: ["WIS", "CHA"],
+    spellAttribute: "WIS",
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Life Domain",
+        "official",
+        "Bonus: heavy armor. Disciple of Life: heals restore extra 2+spell level HP. Preserve Life: channel to spread HP among allies.",
+      ],
+      [
+        "Light Domain",
+        "official",
+        "Bonus: light cantrip. Warding Flare: impose disadvantage on attacker. Radiance of the Dawn: channel to deal radiant and dispel darkness.",
+      ],
+      [
+        "Trickery Domain",
+        "official",
+        "Blessing of the Trickster: adv Stealth. Invoke Duplicity: create illusion duplicate. Cloak of Shadows: become invisible.",
+      ],
+      [
+        "Knowledge Domain",
+        "official",
+        "Blessings of Knowledge: 2 languages, 2 skill proficiencies with expertise. Read Thoughts: channel to read minds. Visions of the Past.",
+      ],
+      [
+        "War Domain",
+        "official",
+        "Bonus: heavy armor, martial weapons. War Priest: weapon attack as bonus action. Guided Strike: channel for +10 to hit.",
+      ],
+      [
+        "Nature Domain",
+        "official",
+        "Bonus: heavy armor, 1 druid cantrip. Dampen Elements: reduce elemental damage to ally. Master of Nature: command charmed animals/plants.",
+      ],
+      [
+        "Tempest Domain",
+        "official",
+        "Bonus: heavy armor, martial weapons. Wrath of the Storm: reaction lightning/thunder. Destructive Wrath: maximize thunder/lightning damage.",
+      ],
+      [
+        "Death Domain",
+        "official",
+        "Bonus: martial weapons. Reaper: cantrips hit two targets. Touch of Death: add necrotic damage on kills. Inescapable Destruction: ignore necrotic resistance.",
+      ],
+      [
+        "Forge Domain",
+        "official",
+        "Bonus: heavy armor, smith tools. Artisan's Blessing: create metal items. Blessing of the Forge: give item +1 AC or +1 attack.",
+      ],
+      [
+        "Grave Domain",
+        "official",
+        "Circle of Mortality: maximize dice on 0 HP healing. Eyes of the Grave: sense undead. Sentinel at Death's Door: cancel crits. Keeper of Souls.",
+      ],
+      [
+        "Order Domain",
+        "official",
+        "Bonus: heavy armor. Voice of Authority: allies attack after you heal them. Order's Demand: channel to charm creatures.",
+      ],
+      [
+        "Peace Domain",
+        "official",
+        "Implement of Peace: proficiency in Insight/Performance/Persuasion. Emboldening Bond: bonded allies can add d4 to checks. Balm of Peace.",
+      ],
+      [
+        "Twilight Domain",
+        "official",
+        "Bonus: heavy armor, martial weapons. Eyes of Night: darkvision 300ft, share with allies. Twilight Sanctuary: aura of protection (temp HP or end charm/fear).",
+      ],
+      [
+        "Arcana Domain",
+        "official",
+        "Arcane Initiate: two wizard cantrips. Spell Breaker: dispel lower-level spells when healing. Arcane Mastery: add high-level wizard spells to list.",
+      ],
+    ],
   },
   {
     ClassName: "Druid",
-    hitDice:8, 
-    primaryAttribute:['INT','WIS'], 
-    spellAttribute:'WIS',
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Circle of the Land',    'official',  'Bonus Cantrip. Natural Recovery: recover spell slots on short rest. Land bonus spells by terrain type. Nature\'s Ward: immune charm/fright by fey/elementals.'],
-            ['Circle of the Moon',    'official',  'Combat Wild Shape: wildshape as bonus action, expend slots for HP. Elemental Wild Shape: become air/earth/fire/water elemental. Enhanced wild shape CR.'],
-            ['Circle of Dreams',      'official',  'Balm of the Summer Court: spend Wild Shape uses to heal. Hearth of Moonlight: protect rest location. Hidden Paths: teleport through trees.',]
-            ['Circle of the Shepherd','official',  'Speech of the Woods: speak with beasts/plants. Spirit Totem: Hawk/Unicorn/Bear aura in wildshape. Faithful Summons on incapacitation.'],
-            ['Circle of Spores',      'official',  'Halo of Spores: reaction necrotic damage. Symbiotic Entity: wildshape charges give temp HP and bonus damage. Spreading Spores. Fungal Infestation.',]
-            ['Circle of Stars',       'official',  'Star Map: free Guidance cantrip, Guiding Bolt. Starry Form: Archer/Chalice/Dragon constellation bonuses. Full of Stars: translucence.'],
-            ['Circle of Wildfire',    'official',  'Wildfire Spirit familiar for bonus summon damage. Enhanced Bond: teleport and boost spells via spirit. Cauterizing Flames: healing on death.'],
-            ['Circle of the Primeval','Homebrew',  '(2022 UA) Keeper of Old: primal beast companion that grows with you. Prehistoric Conduit: boost companion\'s attacks. Titanic Bond: companion grows Large. Eldritch Wilds: companion becomes Huge.'],
-            ['Circle of the Blighted', 'Homebrew', '(Homebrew) Blighted Sapling: create a zone of necrotic terrain. Corrupted Wildshape: necrotic energy melds with beast form. Blight Spores: poison and slow enemies. Death Bloom: massive necrotic AoE.'],
-        ]
+    hitDice: 8,
+    primaryAttribute: ["INT", "WIS"],
+    spellAttribute: "WIS",
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Circle of the Land",
+        "official",
+        "Bonus Cantrip. Natural Recovery: recover spell slots on short rest. Land bonus spells by terrain type. Nature's Ward: immune charm/fright by fey/elementals.",
+      ],
+      [
+        "Circle of the Moon",
+        "official",
+        "Combat Wild Shape: wildshape as bonus action, expend slots for HP. Elemental Wild Shape: become air/earth/fire/water elemental. Enhanced wild shape CR.",
+      ],
+      [
+        "Circle of Dreams",
+        "official",
+        "Balm of the Summer Court: spend Wild Shape uses to heal. Hearth of Moonlight: protect rest location. Hidden Paths: teleport through trees.",
+      ][
+        ("Circle of the Shepherd",
+        "official",
+        "Speech of the Woods: speak with beasts/plants. Spirit Totem: Hawk/Unicorn/Bear aura in wildshape. Faithful Summons on incapacitation.")
+      ],
+      [
+        "Circle of Spores",
+        "official",
+        "Halo of Spores: reaction necrotic damage. Symbiotic Entity: wildshape charges give temp HP and bonus damage. Spreading Spores. Fungal Infestation.",
+      ][
+        ("Circle of Stars",
+        "official",
+        "Star Map: free Guidance cantrip, Guiding Bolt. Starry Form: Archer/Chalice/Dragon constellation bonuses. Full of Stars: translucence.")
+      ],
+      [
+        "Circle of Wildfire",
+        "official",
+        "Wildfire Spirit familiar for bonus summon damage. Enhanced Bond: teleport and boost spells via spirit. Cauterizing Flames: healing on death.",
+      ],
+      [
+        "Circle of the Primeval",
+        "Homebrew",
+        "(2022 UA) Keeper of Old: primal beast companion that grows with you. Prehistoric Conduit: boost companion's attacks. Titanic Bond: companion grows Large. Eldritch Wilds: companion becomes Huge.",
+      ],
+      [
+        "Circle of the Blighted",
+        "Homebrew",
+        "(Homebrew) Blighted Sapling: create a zone of necrotic terrain. Corrupted Wildshape: necrotic energy melds with beast form. Blight Spores: poison and slow enemies. Death Bloom: massive necrotic AoE.",
+      ],
+    ],
   },
   {
     ClassName: "Fighter",
-    hitDice:10, 
-    primaryAttribute:['STR','CON'], 
-    spellAttribute:null,
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Champion',            'official',      'Improved Critical: crit on 19-20. Remarkable Athlete: half prof to unproficient STR/DEX/CON checks. Additional Fighting Style. Superior Critical (18-20).'],
-            ['Battle Master',       'official',      'Combat Superiority: d8 maneuver dice (scale to d10/d12). Choose 3 maneuvers (trip, disarm, feint, riposte, etc.). Know Your Enemy.'],
-            ['Eldritch Knight',     'official',      'Spellcasting (INT, abjuration/evocation focus). Weapon Bond: teleport bonded weapon. War Magic: attack after cantrip. Improved War Magic.',]
-            ['Arcane Archer',       'official',      'Arcane Shot (2/rest): Banishing, Beguiling, Bursting, Enfeebling, Grasping, Piercing, Seeking, Shadow arrow effects.'],
-            ['Cavalier',            'official',      'Bonus Proficiency. Born to the Saddle: mount advantages. Unwavering Mark: mark and punish enemies who attack others. Hold the Line.'],
-            ['Samurai',             'official',      'Bonus Proficiency. Fighting Spirit: temp HP + advantage on attacks 3/day. Elegant Courtier: WIS + CHA primaryAttribute. Tireless Spirit. Strength Before Death.'],
-            ['Psi Warrior',         'official',      'Psionic Power dice (d6→d12): Protective Field, Psionic Strike, Telekinetic Movement. Telekinetic Adept: flight + forceful step.'],
-            ['Rune Knight',         'official',      'Rune Carving: Cloud/Fire/Frost/Stone/Storm runes with passive and triggered effects. Giant\'s Might: grow Large, bonus damage. Runic Shield. Great Stature.'],
-            ['Echo Knight',         'official',      'Manifest Echo: create duplicate, swap positions, attack through it. Unleash Incarnation: extra attacks through echo. Echo Avatar: long-range scouting.'],
-            ['Purple Dragon Knight','official',      'Rallying Cry: Second Wind heals allies. Royal Envoy: Persuasion expertise. Inspiring Surge: ally attacks on Action Surge. Bulwark: Indomitable for allies.'],
-            ['Gunslinger',          'Homebrew',      'Grit: gain grit points to perform special shots. Gunsmith: create a firearm. Quickdraw: draw as part of attack. Special shots: Deadeye, Thunderclap, etc.'],
-            ['Banneret',            'official',      'Bonus Proficiency. Rallying Cry: Second Wind heals allies. Royal Envoy: Persuasion expertise. Inspiring Surge: ally attacks on Action Surge. Bulwark: Indomitable for allies.'],
-        ]
+    hitDice: 10,
+    primaryAttribute: ["STR", "CON"],
+    spellAttribute: null,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Champion",
+        "official",
+        "Improved Critical: crit on 19-20. Remarkable Athlete: half prof to unproficient STR/DEX/CON checks. Additional Fighting Style. Superior Critical (18-20).",
+      ],
+      [
+        "Battle Master",
+        "official",
+        "Combat Superiority: d8 maneuver dice (scale to d10/d12). Choose 3 maneuvers (trip, disarm, feint, riposte, etc.). Know Your Enemy.",
+      ],
+      [
+        "Eldritch Knight",
+        "official",
+        "Spellcasting (INT, abjuration/evocation focus). Weapon Bond: teleport bonded weapon. War Magic: attack after cantrip. Improved War Magic.",
+      ][
+        ("Arcane Archer",
+        "official",
+        "Arcane Shot (2/rest): Banishing, Beguiling, Bursting, Enfeebling, Grasping, Piercing, Seeking, Shadow arrow effects.")
+      ],
+      [
+        "Cavalier",
+        "official",
+        "Bonus Proficiency. Born to the Saddle: mount advantages. Unwavering Mark: mark and punish enemies who attack others. Hold the Line.",
+      ],
+      [
+        "Samurai",
+        "official",
+        "Bonus Proficiency. Fighting Spirit: temp HP + advantage on attacks 3/day. Elegant Courtier: WIS + CHA primaryAttribute. Tireless Spirit. Strength Before Death.",
+      ],
+      [
+        "Psi Warrior",
+        "official",
+        "Psionic Power dice (d6→d12): Protective Field, Psionic Strike, Telekinetic Movement. Telekinetic Adept: flight + forceful step.",
+      ],
+      [
+        "Rune Knight",
+        "official",
+        "Rune Carving: Cloud/Fire/Frost/Stone/Storm runes with passive and triggered effects. Giant's Might: grow Large, bonus damage. Runic Shield. Great Stature.",
+      ],
+      [
+        "Echo Knight",
+        "official",
+        "Manifest Echo: create duplicate, swap positions, attack through it. Unleash Incarnation: extra attacks through echo. Echo Avatar: long-range scouting.",
+      ],
+      [
+        "Purple Dragon Knight",
+        "official",
+        "Rallying Cry: Second Wind heals allies. Royal Envoy: Persuasion expertise. Inspiring Surge: ally attacks on Action Surge. Bulwark: Indomitable for allies.",
+      ],
+      [
+        "Gunslinger",
+        "Homebrew",
+        "Grit: gain grit points to perform special shots. Gunsmith: create a firearm. Quickdraw: draw as part of attack. Special shots: Deadeye, Thunderclap, etc.",
+      ],
+      [
+        "Banneret",
+        "official",
+        "Bonus Proficiency. Rallying Cry: Second Wind heals allies. Royal Envoy: Persuasion expertise. Inspiring Surge: ally attacks on Action Surge. Bulwark: Indomitable for allies.",
+      ],
+    ],
   },
   {
     ClassName: "Healer",
-    hitDice:8, 
-    primaryAttribute:['WIS','CON'], 
-    spellAttribute:'WIS',
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ], 
-    subClass:[
-            ['Vow of the Martyr',     'Homebrew',  'Healers that take the Vow of the Martyr embody selflessness in its truest form. Through relentless study and practice, they wield powers to spare others from suffering, but at their own expense. The heroism of these Healers has inspired many great works of art, and continues to inspire acts of bravery on the battlefield.'],
-            ['Vow of the Augmenter',  'Homebrew',  'Healers who take the Vow of the Augmenter dedicate themselves to the study of life’s potency. Dissatisfied with the limitations of their allies and themselves, they learn transformative magics which make their team-mates stronger, faster and more effective at whatever role they claim. An adventurer never inhabits their full potential until they travel with one of these Healers.'],
-            ['Vow of the Protector',  'Homebrew',  'Healers who take the Vow of the Protector are honor-bound to protect their allies from danger in all forms that it takes. Their abjurative magic empowers their healing and conjures radiant barriers to shield their companions from every threat. Their companions rarely fall - and only after the world itself has tried.'],
-            ['Vow of the Sipher',     'Homebrew',  'Sipher’s vow: sigils and runes that turn healing into lasting protection and resilience.'],    
-        ]
+    hitDice: 8,
+    primaryAttribute: ["WIS", "CON"],
+    spellAttribute: "WIS",
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Vow of the Martyr",
+        "Homebrew",
+        "Healers that take the Vow of the Martyr embody selflessness in its truest form. Through relentless study and practice, they wield powers to spare others from suffering, but at their own expense. The heroism of these Healers has inspired many great works of art, and continues to inspire acts of bravery on the battlefield.",
+      ],
+      [
+        "Vow of the Augmenter",
+        "Homebrew",
+        "Healers who take the Vow of the Augmenter dedicate themselves to the study of life’s potency. Dissatisfied with the limitations of their allies and themselves, they learn transformative magics which make their team-mates stronger, faster and more effective at whatever role they claim. An adventurer never inhabits their full potential until they travel with one of these Healers.",
+      ],
+      [
+        "Vow of the Protector",
+        "Homebrew",
+        "Healers who take the Vow of the Protector are honor-bound to protect their allies from danger in all forms that it takes. Their abjurative magic empowers their healing and conjures radiant barriers to shield their companions from every threat. Their companions rarely fall - and only after the world itself has tried.",
+      ],
+      [
+        "Vow of the Sipher",
+        "Homebrew",
+        "Sipher’s vow: sigils and runes that turn healing into lasting protection and resilience.",
+      ],
+    ],
   },
   {
     ClassName: "Monk",
-    hitDice:8, primaryAttribute:['STR','DEX'], 
-    spellAttribute:null,
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Way of the Open Hand',  'official',    'Open Hand Technique: knock prone, push, deny reactions on Flurry hits. Wholeness of Body: self-heal 3× monk level 1/rest. Tranquility. Quivering Palm.'],
-            ['Way of Shadow',         'official',   'Shadow Arts: darkness/darkvision/silence/pass without trace. Shadow Step: teleport between shadows. Cloak of Shadows (invisible in dim). Shadow Strike.'],
-            ['Way of the Four Elements','official',   'Elemental Disciplines: spend ki for elemental spells/effects (water whip, flame, earth, air). Ride the Wind, Flames of the Phoenix, etc.'],
-            ['Way of the Sun Soul',     'official',  'Radiant Sun Bolt: ranged ki attack. Searing Arc Strike: burning hands with ki. Searing Sunburst: AoE radiant. Sun Shield: light + fire retaliation.'],
-            ['Way of the Kensei',      'official',  'Kensei Weapons: chosen weapons become monk weapons. Agile Parry: +2 AC with kensei weapon. Deft Strike: +1d4 damage. Sharpen the Blade: magic bonus.'],
-            ['Way of Mercy',           'official',   'Implements of Mercy: Insight/Medicine proficiency, healer kit. Hand of Healing: restore HP with Flurry. Hand of Harm: necrotic damage. Physician\'s Touch.'],
-            ['Way of the Astral Self',  'official',  'Arms of the Astral Self: WIS for attacks, bonus action extra attacks. Visage of the Astral Self: darkvision, WIS for Intimidation. Body of the Astral Self.'],
-            ['Way of the Ascendant Dragon','official',   'Draconic Disciple: change damage to acid/cold/fire/lightning/poison, speak Draconic. Breath of the Dragon. Wings Unfurled: fly speed.'],
-            ['Way of the Drunken Master', 'Homebrew', 'Drunken Technique: Tumble + +10ft speed on Flurry. Tipsy Sway: redirect attacks. Drunkard\'s Luck: adv when both dice show same. Intoxicated Frenzy.'],
-            ['Way of the Long Death',   'official',  'Touch of Death: gain temp HP equal to damage dealt to dying creatures. Hour of Reaping: frighten all nearby. Mastery of Death: avoid death with ki. Touch of the Long Death.'],
-        ]
+    hitDice: 8,
+    primaryAttribute: ["STR", "DEX"],
+    spellAttribute: null,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Way of the Open Hand",
+        "official",
+        "Open Hand Technique: knock prone, push, deny reactions on Flurry hits. Wholeness of Body: self-heal 3× monk level 1/rest. Tranquility. Quivering Palm.",
+      ],
+      [
+        "Way of Shadow",
+        "official",
+        "Shadow Arts: darkness/darkvision/silence/pass without trace. Shadow Step: teleport between shadows. Cloak of Shadows (invisible in dim). Shadow Strike.",
+      ],
+      [
+        "Way of the Four Elements",
+        "official",
+        "Elemental Disciplines: spend ki for elemental spells/effects (water whip, flame, earth, air). Ride the Wind, Flames of the Phoenix, etc.",
+      ],
+      [
+        "Way of the Sun Soul",
+        "official",
+        "Radiant Sun Bolt: ranged ki attack. Searing Arc Strike: burning hands with ki. Searing Sunburst: AoE radiant. Sun Shield: light + fire retaliation.",
+      ],
+      [
+        "Way of the Kensei",
+        "official",
+        "Kensei Weapons: chosen weapons become monk weapons. Agile Parry: +2 AC with kensei weapon. Deft Strike: +1d4 damage. Sharpen the Blade: magic bonus.",
+      ],
+      [
+        "Way of Mercy",
+        "official",
+        "Implements of Mercy: Insight/Medicine proficiency, healer kit. Hand of Healing: restore HP with Flurry. Hand of Harm: necrotic damage. Physician's Touch.",
+      ],
+      [
+        "Way of the Astral Self",
+        "official",
+        "Arms of the Astral Self: WIS for attacks, bonus action extra attacks. Visage of the Astral Self: darkvision, WIS for Intimidation. Body of the Astral Self.",
+      ],
+      [
+        "Way of the Ascendant Dragon",
+        "official",
+        "Draconic Disciple: change damage to acid/cold/fire/lightning/poison, speak Draconic. Breath of the Dragon. Wings Unfurled: fly speed.",
+      ],
+      [
+        "Way of the Drunken Master",
+        "Homebrew",
+        "Drunken Technique: Tumble + +10ft speed on Flurry. Tipsy Sway: redirect attacks. Drunkard's Luck: adv when both dice show same. Intoxicated Frenzy.",
+      ],
+      [
+        "Way of the Long Death",
+        "official",
+        "Touch of Death: gain temp HP equal to damage dealt to dying creatures. Hour of Reaping: frighten all nearby. Mastery of Death: avoid death with ki. Touch of the Long Death.",
+      ],
+    ],
   },
   {
     ClassName: "Paladin",
-    hitDice:10, 
-    primaryAttribute:['WIS','CHA'], 
-    spellAttribute:'CHA', 
-    isHalf:true,
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Oath of Devotion',       'official',    'Sacred Weapon: +CHA to attacks. Holy Nimbus: 30ft radiant aura harms fiends/undead. Oath spells: Protection from Evil, Aid, Beacon of Hope, Guardian of Faith.'],
-            ['Oath of the Ancients',   'official',   'Nature\'s Wrath: restrain target. Turn the Faithless: repel fey/fiends. Elder Champion: regrow limbs, spells as bonus, nature attacks. Spells: Ensnaring Strike, Moonbeam, etc.'],
-            ['Oath of Vengeance',      'official',   'Abjure Enemy: frighten one creature. Vow of Enmity: advantage vs target. Relentless Avenger: bonus speed on OA. Soul of Vengeance: bonus attack on Vow target.'],
-            ['Oath of Conquest',       'official',   'Conquering Presence: frighten area. Guided Strike: +10 to hit. Aura of Conquest: frightened creatures speed 0, take psychic damage. Invincible Conqueror.'],
-            ['Oath of Redemption',     'official',   'Emissary of Peace: +5 to Persuasion. Rebuke the Violent: punish attackers with their own damage. Aura of the Guardian: take ally\'s damage. Protective Spirit.'],
-            ['Oath of Glory',          'official',  'Inspiring Smite: distribute temp HP on Divine Smite. Peerless Athlete: adv Athletics/Acrobatics. Aura of Alacrity: speed bonus to allies. Glorious Defense.'],
-            ['Oath of the Watchers',   'official',  'Watcher\'s Will: CHA bonus to INT/WIS/CHA primaryAttribute for allies. Abjure the Extraplanar: turn extraplanar creatures. Aura of the Sentinel: +PB to initiative. Mortal Bulwark.'],
-            ['Oathbreaker',            'official',  'Dark Blessing: CHA to death primaryAttribute. Control Undead. Aura of Hate: CHA to weapon damage + fiends/undead nearby also gain it. Supernatural Resistance. Dread Lord.'],
-            ['Oath of Heroism',        'official',  'Peerless Athlete: adv Athletics/Acrobatics. Inspiring Smite: temp HP on smite. Aura of Alacrity: speed boost. Glorious Defense: deflect attacks with CHA.'],
-            ['Oath of the Crown',      'official',  'Champion Challenge: pull enemies into duel. Turn the Tide: heal allies at 0 HP. Divine Allegiance: redirect ally damage to yourself. Unyielding Saint: STR/CON primaryAttribute.'],
-            ['Oath of Treachery',      'official',  'Betrayer\'s Tongue: proficiency in Deception and disguise kit. Heartbreaker: CHA to damage against charmed targets. Mace of Treachery: magic weapon that can turn on you. Traitor\'s Fate.'],
-            ['Oath of the Dragon',     'official',  'Dragon\'s Breath: exhale elemental damage. Draconic Presence: frighten or charm in 30ft. Dragon\'s Flight: fly speed. Draconic Majesty: advantage on CHA checks vs dragons.'],
-            ['Oath of the nobleGenies','official', 'Genie\'s Vessel: summon elemental servant. Elemental Gift: resistance to one damage type, extra damage on smite. Sanctuary Vessel: teleport to vessel as reaction. Genie\'s Wrath: extra damage and push on smite.'],
-            ['Oath of Treachery',   'Homebrew',    '(UA) Invoke Duplicity-style abilities. Blackguard\'s Escape: disengage as bonus action. Aura of Treachery: enemies within 10ft have disadvantage on primaryAttribute vs your allies. Blackguard\'s Smite.'],
-            ['Oath of the Dragon',  'Homebrew',    '(Homebrew) Draconic Smite: smite deals chosen elemental damage. Wyrm\'s Aura: allies gain elemental resistance. Aspect of the Dragon: grow wings, use breath weapon. Dragonic Presence: frighten with your aura.'],
-        ]
+    hitDice: 10,
+    primaryAttribute: ["WIS", "CHA"],
+    spellAttribute: "CHA",
+    isHalf: true,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Oath of Devotion",
+        "official",
+        "Sacred Weapon: +CHA to attacks. Holy Nimbus: 30ft radiant aura harms fiends/undead. Oath spells: Protection from Evil, Aid, Beacon of Hope, Guardian of Faith.",
+      ],
+      [
+        "Oath of the Ancients",
+        "official",
+        "Nature's Wrath: restrain target. Turn the Faithless: repel fey/fiends. Elder Champion: regrow limbs, spells as bonus, nature attacks. Spells: Ensnaring Strike, Moonbeam, etc.",
+      ],
+      [
+        "Oath of Vengeance",
+        "official",
+        "Abjure Enemy: frighten one creature. Vow of Enmity: advantage vs target. Relentless Avenger: bonus speed on OA. Soul of Vengeance: bonus attack on Vow target.",
+      ],
+      [
+        "Oath of Conquest",
+        "official",
+        "Conquering Presence: frighten area. Guided Strike: +10 to hit. Aura of Conquest: frightened creatures speed 0, take psychic damage. Invincible Conqueror.",
+      ],
+      [
+        "Oath of Redemption",
+        "official",
+        "Emissary of Peace: +5 to Persuasion. Rebuke the Violent: punish attackers with their own damage. Aura of the Guardian: take ally's damage. Protective Spirit.",
+      ],
+      [
+        "Oath of Glory",
+        "official",
+        "Inspiring Smite: distribute temp HP on Divine Smite. Peerless Athlete: adv Athletics/Acrobatics. Aura of Alacrity: speed bonus to allies. Glorious Defense.",
+      ],
+      [
+        "Oath of the Watchers",
+        "official",
+        "Watcher's Will: CHA bonus to INT/WIS/CHA primaryAttribute for allies. Abjure the Extraplanar: turn extraplanar creatures. Aura of the Sentinel: +PB to initiative. Mortal Bulwark.",
+      ],
+      [
+        "Oathbreaker",
+        "official",
+        "Dark Blessing: CHA to death primaryAttribute. Control Undead. Aura of Hate: CHA to weapon damage + fiends/undead nearby also gain it. Supernatural Resistance. Dread Lord.",
+      ],
+      [
+        "Oath of Heroism",
+        "official",
+        "Peerless Athlete: adv Athletics/Acrobatics. Inspiring Smite: temp HP on smite. Aura of Alacrity: speed boost. Glorious Defense: deflect attacks with CHA.",
+      ],
+      [
+        "Oath of the Crown",
+        "official",
+        "Champion Challenge: pull enemies into duel. Turn the Tide: heal allies at 0 HP. Divine Allegiance: redirect ally damage to yourself. Unyielding Saint: STR/CON primaryAttribute.",
+      ],
+      [
+        "Oath of Treachery",
+        "official",
+        "Betrayer's Tongue: proficiency in Deception and disguise kit. Heartbreaker: CHA to damage against charmed targets. Mace of Treachery: magic weapon that can turn on you. Traitor's Fate.",
+      ],
+      [
+        "Oath of the Dragon",
+        "official",
+        "Dragon's Breath: exhale elemental damage. Draconic Presence: frighten or charm in 30ft. Dragon's Flight: fly speed. Draconic Majesty: advantage on CHA checks vs dragons.",
+      ],
+      [
+        "Oath of the nobleGenies",
+        "official",
+        "Genie's Vessel: summon elemental servant. Elemental Gift: resistance to one damage type, extra damage on smite. Sanctuary Vessel: teleport to vessel as reaction. Genie's Wrath: extra damage and push on smite.",
+      ],
+      [
+        "Oath of Treachery",
+        "Homebrew",
+        "(UA) Invoke Duplicity-style abilities. Blackguard's Escape: disengage as bonus action. Aura of Treachery: enemies within 10ft have disadvantage on primaryAttribute vs your allies. Blackguard's Smite.",
+      ],
+      [
+        "Oath of the Dragon",
+        "Homebrew",
+        "(Homebrew) Draconic Smite: smite deals chosen elemental damage. Wyrm's Aura: allies gain elemental resistance. Aspect of the Dragon: grow wings, use breath weapon. Dragonic Presence: frighten with your aura.",
+      ],
+    ],
   },
   {
     ClassName: "Ranger",
-    hitDice:10, 
-    primaryAttribute:['STR','DEX'], 
-    spellAttribute:'WIS', 
-    isHalf:true,
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                      ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Hunter',           'official',        'Hunter\'s Prey: Colossus Slayer / Giant Killer / Horde Breaker. Defensive Tactics: Escape the Horde / Multiattack Defense / Steel Will. Multiattack options.'],
-            ['Beast Master',     'official',        'Ranger\'s Companion: bond with a beast. Exceptional Training: beast uses your bonus action, can take non-attack actions. Bestial Fury: beast makes 2 attacks.'],
-            ['Gloom Stalker',    'official',       'Dread Ambusher: +1d8 on first turn attacks, +10ft speed on first turn. Umbral Sight: invisible in darkness. Iron Mind: WIS save prof. Stalker\'s Flurry.'],
-            ['Horizon Walker',   'official',       'Detect Portal: sense planar portals. Planar Warrior: extra force damage. Ethereal Step: ethereal plane briefly. Distant Strike: teleport before attacking.'],
-            ['Monster Slayer',   'official',       'Hunter\'s Sense: sense vulnerabilities/immunities. Slayer\'s Prey: bonus damage vs one target. Supernatural Defense: bonus to primaryAttribute/grapple vs prey. Slayer\'s Counter.'],
-            ['Fey Wanderer',     'official',      'Dreadful Strikes: psychic damage. Otherworldly Glamour: CHA bonus to checks, extra language. Beguiling Twist: redirect charm/fright. Fey Reinforcements.'],
-            ['Swarmkeeper',      'official',      'Gathered Swarm: bonus attack move/damage. Writhing Tide: fly speed. Mighty Swarm: knock prone/restrain. Swarming Dispersal: escape with temp HP.'],
-            ['Drakewarden',      'official',     'Drake Companion: bonded drake fights with you. Bond of Fang and Scale: share drake\'s resistances, ride it. Drake\'s Breath weapon. Perfected Bond: drake grows Large.'],
-            ['Monster Hunter',   'official',       'Hunter\'s Sense: sense vulnerabilities/immunities. Slayer\'s Prey: bonus damage vs one target. Supernatural Defense: bonus to primaryAttribute/grapple vs prey. Slayer\'s Counter.'],
-            ['winter walker',    'official',      'Ice Walk: move across ice without penalty, ignore difficult terrain from ice/snow. Arctic Camouflage: advantage on Stealth in cold environments. Snow Mastery: create difficult terrain with snow. Subzero Shroud: resistance to cold, immunity to snow/ice.'],
-            ['Monster Hunter',   'Homebrew',      '(Matt Mercer homebrew) Monster\'s Bane: bonus damage vs monstrosities/undead. Supernatural Defense: bonus to primaryAttribute vs monster abilities. Relentless: advantage on checks vs creatures you\'ve hit. Magic\'s Bane: resistance to spell damage.'],
-        ]
+    hitDice: 10,
+    primaryAttribute: ["STR", "DEX"],
+    spellAttribute: "WIS",
+    isHalf: true,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Hunter",
+        "official",
+        "Hunter's Prey: Colossus Slayer / Giant Killer / Horde Breaker. Defensive Tactics: Escape the Horde / Multiattack Defense / Steel Will. Multiattack options.",
+      ],
+      [
+        "Beast Master",
+        "official",
+        "Ranger's Companion: bond with a beast. Exceptional Training: beast uses your bonus action, can take non-attack actions. Bestial Fury: beast makes 2 attacks.",
+      ],
+      [
+        "Gloom Stalker",
+        "official",
+        "Dread Ambusher: +1d8 on first turn attacks, +10ft speed on first turn. Umbral Sight: invisible in darkness. Iron Mind: WIS save prof. Stalker's Flurry.",
+      ],
+      [
+        "Horizon Walker",
+        "official",
+        "Detect Portal: sense planar portals. Planar Warrior: extra force damage. Ethereal Step: ethereal plane briefly. Distant Strike: teleport before attacking.",
+      ],
+      [
+        "Monster Slayer",
+        "official",
+        "Hunter's Sense: sense vulnerabilities/immunities. Slayer's Prey: bonus damage vs one target. Supernatural Defense: bonus to primaryAttribute/grapple vs prey. Slayer's Counter.",
+      ],
+      [
+        "Fey Wanderer",
+        "official",
+        "Dreadful Strikes: psychic damage. Otherworldly Glamour: CHA bonus to checks, extra language. Beguiling Twist: redirect charm/fright. Fey Reinforcements.",
+      ],
+      [
+        "Swarmkeeper",
+        "official",
+        "Gathered Swarm: bonus attack move/damage. Writhing Tide: fly speed. Mighty Swarm: knock prone/restrain. Swarming Dispersal: escape with temp HP.",
+      ],
+      [
+        "Drakewarden",
+        "official",
+        "Drake Companion: bonded drake fights with you. Bond of Fang and Scale: share drake's resistances, ride it. Drake's Breath weapon. Perfected Bond: drake grows Large.",
+      ],
+      [
+        "Monster Hunter",
+        "official",
+        "Hunter's Sense: sense vulnerabilities/immunities. Slayer's Prey: bonus damage vs one target. Supernatural Defense: bonus to primaryAttribute/grapple vs prey. Slayer's Counter.",
+      ],
+      [
+        "winter walker",
+        "official",
+        "Ice Walk: move across ice without penalty, ignore difficult terrain from ice/snow. Arctic Camouflage: advantage on Stealth in cold environments. Snow Mastery: create difficult terrain with snow. Subzero Shroud: resistance to cold, immunity to snow/ice.",
+      ],
+      [
+        "Monster Hunter",
+        "Homebrew",
+        "(Matt Mercer homebrew) Monster's Bane: bonus damage vs monstrosities/undead. Supernatural Defense: bonus to primaryAttribute vs monster abilities. Relentless: advantage on checks vs creatures you've hit. Magic's Bane: resistance to spell damage.",
+      ],
+    ],
   },
   {
     ClassName: "Rogue",
-    hitDice:8, 
-    primaryAttribute:['DEX','INT'], 
-    spellAttribute:null,
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Thief',          'official',         'Fast Hands: bonus action Sleight of Hand/thieves tools/object. Second-Story Work: climb speed, running jump bonus. Supreme Sneak: adv Stealth at half speed. Thief\'s Reflexes.'],
-            ['Assassin',        'official',        'Bonus Proficiencies: disguise kit, poisoner\'s kit. Assassinate: adv vs creatures that haven\'t acted + auto-crit on surprised targets. Infiltration Expertise. Impostor.'],
-            ['Arcane Trickster','official',        'Spellcasting (INT, enchantment/illusion focus). Mage Hand Legerdemain: bonus action hide/pickpocket with mage hand. Magical Ambush: adv on spells vs unaware targets.'],
-            ['Inquisitive',     'official',        'Ear for Deceit: min 8 on Insight. Eye for Detail: bonus action Perception/Investigation. Insightful Fighting: Sneak Attack without ally using Insight vs Deception.'],
-            ['Mastermind',      'official',        'Master of Intrigue: disguise/forgery kits, 2 languages. Master of Tactics: Help as bonus action from 30ft. Insightful Manipulator. Misdirection. Soul of Deceit.'],
-            ['Scout',           'official',        'Skirmisher: reaction to move half speed when enemy ends near you. Survivalist: Nature/Survival proficiency + expertise. Superior Mobility: +10 speed. Ambush Master.'],
-            ['Swashbuckler',    'official',        'Fancy Footwork: no OA after attacking. Rakish Audacity: add CHA to initiative; Sneak Attack without ally if 1v1. Panache. Elegant Maneuver. Master Duelist.'],
-            ['Phantom',         'official',        'Whispers of the Dead: gain skill/tool prof from nearby dead. Wails from the Grave: extra Sneak Attack damage to second target. Tokens of the Departed. Ghost Walk.'],
-            ['Soulknife',       'official',        'Psionic Power: Psionic Whispers, Psychic Blades (1d6 psychic finesse thrown), Psychic Veil: invisibility. Rend Mind: stun target on sneak attack.'],
-            ['scorn of the three','official',      'Bonus Proficiency: Intimidation. Mark of the Blade: teleport to marked target, add INT to damage. Mark of the Shadow: teleport between shadows. Mark of the Whisper: invisibility and telepathy.'],
-            ['The Seeker',         'Homebrew',     '(UA) Shielding Aurora: resistance to radiant damage and aura of light. Astral Refuge: escape to astral plane briefly. Far Wanderer: fly speed. Astral Sequestration: banish a creature.'],
-            ['Investigator',        'Homebrew',    '(Ravnica) Eye for Weakness: bonus sneak attack dice on first hit per turn vs unseen target. Probing Investigation: bonus action Insight check. Underworld Connections: gather information from criminal contacts. Versatile Crimestopper.'],
-
-        ]
+    hitDice: 8,
+    primaryAttribute: ["DEX", "INT"],
+    spellAttribute: null,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Thief",
+        "official",
+        "Fast Hands: bonus action Sleight of Hand/thieves tools/object. Second-Story Work: climb speed, running jump bonus. Supreme Sneak: adv Stealth at half speed. Thief's Reflexes.",
+      ],
+      [
+        "Assassin",
+        "official",
+        "Bonus Proficiencies: disguise kit, poisoner's kit. Assassinate: adv vs creatures that haven't acted + auto-crit on surprised targets. Infiltration Expertise. Impostor.",
+      ],
+      [
+        "Arcane Trickster",
+        "official",
+        "Spellcasting (INT, enchantment/illusion focus). Mage Hand Legerdemain: bonus action hide/pickpocket with mage hand. Magical Ambush: adv on spells vs unaware targets.",
+      ],
+      [
+        "Inquisitive",
+        "official",
+        "Ear for Deceit: min 8 on Insight. Eye for Detail: bonus action Perception/Investigation. Insightful Fighting: Sneak Attack without ally using Insight vs Deception.",
+      ],
+      [
+        "Mastermind",
+        "official",
+        "Master of Intrigue: disguise/forgery kits, 2 languages. Master of Tactics: Help as bonus action from 30ft. Insightful Manipulator. Misdirection. Soul of Deceit.",
+      ],
+      [
+        "Scout",
+        "official",
+        "Skirmisher: reaction to move half speed when enemy ends near you. Survivalist: Nature/Survival proficiency + expertise. Superior Mobility: +10 speed. Ambush Master.",
+      ],
+      [
+        "Swashbuckler",
+        "official",
+        "Fancy Footwork: no OA after attacking. Rakish Audacity: add CHA to initiative; Sneak Attack without ally if 1v1. Panache. Elegant Maneuver. Master Duelist.",
+      ],
+      [
+        "Phantom",
+        "official",
+        "Whispers of the Dead: gain skill/tool prof from nearby dead. Wails from the Grave: extra Sneak Attack damage to second target. Tokens of the Departed. Ghost Walk.",
+      ],
+      [
+        "Soulknife",
+        "official",
+        "Psionic Power: Psionic Whispers, Psychic Blades (1d6 psychic finesse thrown), Psychic Veil: invisibility. Rend Mind: stun target on sneak attack.",
+      ],
+      [
+        "scorn of the three",
+        "official",
+        "Bonus Proficiency: Intimidation. Mark of the Blade: teleport to marked target, add INT to damage. Mark of the Shadow: teleport between shadows. Mark of the Whisper: invisibility and telepathy.",
+      ],
+      [
+        "The Seeker",
+        "Homebrew",
+        "(UA) Shielding Aurora: resistance to radiant damage and aura of light. Astral Refuge: escape to astral plane briefly. Far Wanderer: fly speed. Astral Sequestration: banish a creature.",
+      ],
+      [
+        "Investigator",
+        "Homebrew",
+        "(Ravnica) Eye for Weakness: bonus sneak attack dice on first hit per turn vs unseen target. Probing Investigation: bonus action Insight check. Underworld Connections: gather information from criminal contacts. Versatile Crimestopper.",
+      ],
+    ],
   },
   {
     ClassName: "Sorcerer",
-    hitDice:6, 
-    primaryAttribute:['CON','CHA'], 
-    spellAttribute:'CHA',
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['Draconic Bloodline',  'official',    'Dragon Ancestor: choose dragon type for damage resistance and language. Draconic Resilience: +1 HP/level, AC 13+DEX without armor. Elemental Affinity: add CHA to damage. Dragon Wings.'],
-            ['Wild Magic',          'official',    'Wild Magic Surge: 1-in-20 random effects after casting. Tides of Chaos: advantage 1/rest (recharges on surge). Bend Luck: spend 2 points to adjust any roll.'],
-            ['Shadow Magic',        'official',    'Eyes of the Dark: darkness for 1 point. Strength of the Grave: CON save to stay at 1 HP 1/day. Hound of Ill Omen: summon shadowy hound. Shadow Walk.'],
-            ['Divine Soul',         'official',    'Divine Magic: access to cleric spell list. Favored by the Gods: +2d4 to primaryAttribute/attacks 1/rest. Empowered Healing: reroll healing dice. Otherworldly Wings.'],
-            ['Aberrant Mind',       'official',    'Telepathic Speech: communicate telepathically. Psionic Spells: bonus spells (detect thoughts, etc.). Revelation in Flesh: spend points for wings/swim/see invisible.'],
-            ['Clockwork Soul',      'official',    'Clockwork Magic: bonus restoration/protection spells. Restore Balance: cancel adv/disadv. Bulwark of Law: absorb d8s = Sorcery points. Trance of Order.'],
-            ['Lunar Sorcery',       'official',    'Moon Fire: sacred flame hits two. Lunar Embodiment: bonus spells per phase. Waxing/Full/Waning moon powers. Lunar Phenomenon: zone of power.'],
-            ['Runechild',           'Homebrew',    'Rune Magic: inscribe runes for various effects. Rune Carver: use runes as spellcasting focus, extra runes. Runic Shield: reaction shield. Rune Mastery: extra effects on runes.'],
-            ['spellfire sorcery',   'official',    'Spellfire Magic: heal with spell slots, damage with spell slots. Spellfire Adept: gain spellfire magic at 1st level, extra damage on spell attacks. Spellfire Master: regain spell slot on kill, extra damage on spell attacks.'],
-        ]
+    hitDice: 6,
+    primaryAttribute: ["CON", "CHA"],
+    spellAttribute: "CHA",
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Draconic Bloodline",
+        "official",
+        "Dragon Ancestor: choose dragon type for damage resistance and language. Draconic Resilience: +1 HP/level, AC 13+DEX without armor. Elemental Affinity: add CHA to damage. Dragon Wings.",
+      ],
+      [
+        "Wild Magic",
+        "official",
+        "Wild Magic Surge: 1-in-20 random effects after casting. Tides of Chaos: advantage 1/rest (recharges on surge). Bend Luck: spend 2 points to adjust any roll.",
+      ],
+      [
+        "Shadow Magic",
+        "official",
+        "Eyes of the Dark: darkness for 1 point. Strength of the Grave: CON save to stay at 1 HP 1/day. Hound of Ill Omen: summon shadowy hound. Shadow Walk.",
+      ],
+      [
+        "Divine Soul",
+        "official",
+        "Divine Magic: access to cleric spell list. Favored by the Gods: +2d4 to primaryAttribute/attacks 1/rest. Empowered Healing: reroll healing dice. Otherworldly Wings.",
+      ],
+      [
+        "Aberrant Mind",
+        "official",
+        "Telepathic Speech: communicate telepathically. Psionic Spells: bonus spells (detect thoughts, etc.). Revelation in Flesh: spend points for wings/swim/see invisible.",
+      ],
+      [
+        "Clockwork Soul",
+        "official",
+        "Clockwork Magic: bonus restoration/protection spells. Restore Balance: cancel adv/disadv. Bulwark of Law: absorb d8s = Sorcery points. Trance of Order.",
+      ],
+      [
+        "Lunar Sorcery",
+        "official",
+        "Moon Fire: sacred flame hits two. Lunar Embodiment: bonus spells per phase. Waxing/Full/Waning moon powers. Lunar Phenomenon: zone of power.",
+      ],
+      [
+        "Runechild",
+        "Homebrew",
+        "Rune Magic: inscribe runes for various effects. Rune Carver: use runes as spellcasting focus, extra runes. Runic Shield: reaction shield. Rune Mastery: extra effects on runes.",
+      ],
+      [
+        "spellfire sorcery",
+        "official",
+        "Spellfire Magic: heal with spell slots, damage with spell slots. Spellfire Adept: gain spellfire magic at 1st level, extra damage on spell attacks. Spellfire Master: regain spell slot on kill, extra damage on spell attacks.",
+      ],
+    ],
   },
   {
     ClassName: "Warlock",
-    hitDice:8, 
-    primaryAttribute:['WIS','CHA'], 
-    spellAttribute:'CHA', 
-    isPact:true,
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-            ['The Archfey',        'official',    'Fey Presence: charm or frighten nearby. Misty Escape: reaction to teleport and become invisible. Beguiling Defenses: immune to charm, reflect it. Dark Delirium.'],
-            ['The Fiend',          'official',    'Dark One\'s Blessing: temp HP on kills (= CHA mod + level). Dark One\'s Own Luck: +1d10 to ability check/save 1/rest. Fiendish Resilience: damage resistance choice.'],
-            ['The Great Old One',  'official',    'Awakened Mind: telepathy 30ft. Entropic Ward: impose disadv on attacker, gain adv next attack. Thought Shield: psychic resistance, reflect damage.'],
-            ['The Undying',        'official',    'Among the Dead: Spare the Dying cantrip. Defy Death: regain HP on 0 HP 1/rest. Undying Nature: no aging, no food/water/air, advantage vs disease. Indestructible Life.'],
-            ['The Celestial',      'official',    'Bonus Cantrips: Light, Sacred Flame. Healing Light: pool of d6s (= 1 + Warlock level) for bonus action healing. Radiant Soul: resistance + add CHA to radiant/fire spells.'],
-            ['The Hexblade',       'official',    'Hexblade\'s Curse: mark target for bonus damage, crit range, HP on kill. Hex Warrior: medium armor/shields/martial weapons with CHA attacks. Accursed Specter.'],
-            ['The Fathomless',     'official',    'Tentacle of the Deeps: summon 10ft tentacle that slows and damages. Gift of the Sea: swim speed, water breathing. Oceanic Soul: resistance to cold, speak with water creatures.'],
-            ['The Genie',          'official',    'Genie\'s Vessel: enter tiny vessel for rest. Elemental Gift: resistance (by genie type) + fly speed. Sanctuary Vessel: invite allies. Limited Wish at 17th.'],
-            ['The Undead',         'official',    'Form of Dread: frighten creatures, temp HP, death immunity briefly. Grave Touched: ignore resistance to necrotic. Necrotic Husk: necrotic resistance, explosion on death.'],
-        ]
+    hitDice: 8,
+    primaryAttribute: ["WIS", "CHA"],
+    spellAttribute: "CHA",
+    isPact: true,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "The Archfey",
+        "official",
+        "Fey Presence: charm or frighten nearby. Misty Escape: reaction to teleport and become invisible. Beguiling Defenses: immune to charm, reflect it. Dark Delirium.",
+      ],
+      [
+        "The Fiend",
+        "official",
+        "Dark One's Blessing: temp HP on kills (= CHA mod + level). Dark One's Own Luck: +1d10 to ability check/save 1/rest. Fiendish Resilience: damage resistance choice.",
+      ],
+      [
+        "The Great Old One",
+        "official",
+        "Awakened Mind: telepathy 30ft. Entropic Ward: impose disadv on attacker, gain adv next attack. Thought Shield: psychic resistance, reflect damage.",
+      ],
+      [
+        "The Undying",
+        "official",
+        "Among the Dead: Spare the Dying cantrip. Defy Death: regain HP on 0 HP 1/rest. Undying Nature: no aging, no food/water/air, advantage vs disease. Indestructible Life.",
+      ],
+      [
+        "The Celestial",
+        "official",
+        "Bonus Cantrips: Light, Sacred Flame. Healing Light: pool of d6s (= 1 + Warlock level) for bonus action healing. Radiant Soul: resistance + add CHA to radiant/fire spells.",
+      ],
+      [
+        "The Hexblade",
+        "official",
+        "Hexblade's Curse: mark target for bonus damage, crit range, HP on kill. Hex Warrior: medium armor/shields/martial weapons with CHA attacks. Accursed Specter.",
+      ],
+      [
+        "The Fathomless",
+        "official",
+        "Tentacle of the Deeps: summon 10ft tentacle that slows and damages. Gift of the Sea: swim speed, water breathing. Oceanic Soul: resistance to cold, speak with water creatures.",
+      ],
+      [
+        "The Genie",
+        "official",
+        "Genie's Vessel: enter tiny vessel for rest. Elemental Gift: resistance (by genie type) + fly speed. Sanctuary Vessel: invite allies. Limited Wish at 17th.",
+      ],
+      [
+        "The Undead",
+        "official",
+        "Form of Dread: frighten creatures, temp HP, death immunity briefly. Grave Touched: ignore resistance to necrotic. Necrotic Husk: necrotic resistance, explosion on death.",
+      ],
+    ],
   },
   {
-    ClassName:"Wizard",
-    hitDice:6, 
-    primaryAttribute:['INT','WIS'], 
-    spellAttribute:'INT',
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-           [ 'School of Abjuration',   'official', 'Abjuration Savant: half cost to copy abjuration spells. Arcane Ward: absorb damage with ward HP pool (2× INT mod + Wizard level). Projected Ward. Improved Abjuration.'],
-           [ 'School of Conjuration',  'official', 'Conjuration Savant: half cost. Minor Conjuration: create small objects. Benign Transposition: teleport or swap with ally 1/rest. Focused Conjuration. Durable Summons.'],
-           [ 'School of Divination',   'official', 'Divination Savant. Portent: roll 2d20 at dawn, replace any roll with these results. Expert Divination: recover lower spell slots when casting divination. Third Eye.'],
-           [ 'School of Enchantment',  'official', 'Enchantment Savant. Hypnotic Gaze: charm one creature each short rest. Instinctive Charm: redirect attacks to nearby creatures. Split Enchantment: hit two with enchantments.'],
-           [ 'School of Evocation',    'official', 'Evocation Savant. Sculpt Spells: protect allies from your AoE. Potent Cantrip: half damage on successful save. Empowered Evocation: add INT mod to evocation damage.'],
-           [ 'School of Illusion',     'official', 'Illusion Savant. Improved Minor Illusion: add sound AND image. Malleable Illusions: move existing illusions. Illusory Self: reaction duplicate that absorbs hit. Illusory Reality.'],
-           [ 'School of Necromancy',   'official', 'Necromancy Savant. Grim Harvest: regain HP when spells kill. Undead Thralls: animate dead creates extra zombies with better HP. Inured to Undeath. Command Undead.'],
-           [ 'School of Transmutation','official', 'Transmutation Savant. Minor Alchemy: temporarily change material of object. Transmuter\'s Stone: grant darkvision/speed/resist/proficiency aura. Shapechanger. Master Transmuter.'],
-           [ 'Bladesinging',           'official', 'Training in War and Song: light armor + performance proficiency. Bladesong: +INT to AC, +10 speed, advantage on DEX(Acrobatics), concentration primaryAttribute. Extra Attack. Song of Defense.'],
-           [ 'War Magic',              'official', 'Arcane Deflection: reaction +2 AC / +4 to save. Tactical Wit: add INT to initiative. Power Surge: extra force damage stored from counterspell/dispel.'],
-           [ 'Chronurgy Magic',        'official', 'Chronal Shift: reroll d20 twice per long rest. Temporal Awareness: add INT to initiative. Momentary Stasis: incapacitate target. Convergent Future: guarantee results.'],
-           [ 'Graviturgy Magic',       'official', 'Adjust Density: slow or speed creature. Gravity Well: move creature 5ft after spell. Violent Attraction: add d10 to damage or falling. Event Horizon: pull/slow all nearby.'],
-           [ 'Order of Scribes',       'official', 'Awakened Spellbook: use book as focus, change damage type of spells. Manifest Mind: project spellcasting focus 300ft. Master Scrivener: create 1st/2nd level spell scrolls free.'],
-           [ 'School of Artifice',     'official', 'Bonus tool proficiency. Arcane Armaments: attune to more items. Craft Magical Item: create magical items using spell slots. Artificer\'s Magic: INT for magic item primaryAttribute.'],
-           ['School of Psionics',      'Homebrew', '(UA) Psionic Focus: bonus to one mental ability check type. Psionic Devotion: bonus cantrips powered by mind. Thought Form: shed body and become psionic entity. Mental Discipline: resistance to psychic damage.'],
-        ]
+    ClassName: "Wizard",
+    hitDice: 6,
+    primaryAttribute: ["INT", "WIS"],
+    spellAttribute: "INT",
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "School of Abjuration",
+        "official",
+        "Abjuration Savant: half cost to copy abjuration spells. Arcane Ward: absorb damage with ward HP pool (2× INT mod + Wizard level). Projected Ward. Improved Abjuration.",
+      ],
+      [
+        "School of Conjuration",
+        "official",
+        "Conjuration Savant: half cost. Minor Conjuration: create small objects. Benign Transposition: teleport or swap with ally 1/rest. Focused Conjuration. Durable Summons.",
+      ],
+      [
+        "School of Divination",
+        "official",
+        "Divination Savant. Portent: roll 2d20 at dawn, replace any roll with these results. Expert Divination: recover lower spell slots when casting divination. Third Eye.",
+      ],
+      [
+        "School of Enchantment",
+        "official",
+        "Enchantment Savant. Hypnotic Gaze: charm one creature each short rest. Instinctive Charm: redirect attacks to nearby creatures. Split Enchantment: hit two with enchantments.",
+      ],
+      [
+        "School of Evocation",
+        "official",
+        "Evocation Savant. Sculpt Spells: protect allies from your AoE. Potent Cantrip: half damage on successful save. Empowered Evocation: add INT mod to evocation damage.",
+      ],
+      [
+        "School of Illusion",
+        "official",
+        "Illusion Savant. Improved Minor Illusion: add sound AND image. Malleable Illusions: move existing illusions. Illusory Self: reaction duplicate that absorbs hit. Illusory Reality.",
+      ],
+      [
+        "School of Necromancy",
+        "official",
+        "Necromancy Savant. Grim Harvest: regain HP when spells kill. Undead Thralls: animate dead creates extra zombies with better HP. Inured to Undeath. Command Undead.",
+      ],
+      [
+        "School of Transmutation",
+        "official",
+        "Transmutation Savant. Minor Alchemy: temporarily change material of object. Transmuter's Stone: grant darkvision/speed/resist/proficiency aura. Shapechanger. Master Transmuter.",
+      ],
+      [
+        "Bladesinging",
+        "official",
+        "Training in War and Song: light armor + performance proficiency. Bladesong: +INT to AC, +10 speed, advantage on DEX(Acrobatics), concentration primaryAttribute. Extra Attack. Song of Defense.",
+      ],
+      [
+        "War Magic",
+        "official",
+        "Arcane Deflection: reaction +2 AC / +4 to save. Tactical Wit: add INT to initiative. Power Surge: extra force damage stored from counterspell/dispel.",
+      ],
+      [
+        "Chronurgy Magic",
+        "official",
+        "Chronal Shift: reroll d20 twice per long rest. Temporal Awareness: add INT to initiative. Momentary Stasis: incapacitate target. Convergent Future: guarantee results.",
+      ],
+      [
+        "Graviturgy Magic",
+        "official",
+        "Adjust Density: slow or speed creature. Gravity Well: move creature 5ft after spell. Violent Attraction: add d10 to damage or falling. Event Horizon: pull/slow all nearby.",
+      ],
+      [
+        "Order of Scribes",
+        "official",
+        "Awakened Spellbook: use book as focus, change damage type of spells. Manifest Mind: project spellcasting focus 300ft. Master Scrivener: create 1st/2nd level spell scrolls free.",
+      ],
+      [
+        "School of Artifice",
+        "official",
+        "Bonus tool proficiency. Arcane Armaments: attune to more items. Craft Magical Item: create magical items using spell slots. Artificer's Magic: INT for magic item primaryAttribute.",
+      ],
+      [
+        "School of Psionics",
+        "Homebrew",
+        "(UA) Psionic Focus: bonus to one mental ability check type. Psionic Devotion: bonus cantrips powered by mind. Thought Form: shed body and become psionic entity. Mental Discipline: resistance to psychic damage.",
+      ],
+    ],
   },
   {
     ClassName: "Bloodhunter",
-    hitDice:10, 
-    primaryAttribute:['DEX','INT'], 
-    spellAttribute:'INT', 
-    isHalf:false,
-    Features:[
-                    ['LVL 1', ''],
-                    ['LVL 2', ''],
-                    ['LVL 3', ''],
-                    ['LVL 4', ''],
-                    ['LVL 5', ''],
-                    ['LVL 6', ''],
-                    ['LVL 7', ''],
-                    ['LVL 8', ''],
-                    ['LVL 9', ''],
-                    ['LVL 10', ''],
-                    ['LVL 11', ''],
-                    ['LVL 12', ''],
-                    ['LVL 13', ''],
-                    ['LVL 14', ''],
-                    ['LVL 15', ''],
-                    ['LVL 16', ''],
-                    ['LVL 17', ''],
-                    ['LVL 18', ''],
-                    ['LVL 19', ''],
-                    ['LVL 20', ''],
-            ],
-    subClass:[
-             ['Order of the Ghostslayer','Homebrew','(Critical Role — Matt Mercer) Rite of the Dawn: Crimson Rite deals radiant damage and suppresses undead regeneration. Ethereal Step: enter the Border Ethereal briefly as a bonus action. Vengeful Spirit: when you die, your spirit remains for 1 minute to continue fighting.'],
-             ['Order of the Profane Soul','Homebrew','(Critical Role) Pact Magic: gain warlock spell slots and cantrips (2 patrons available). Mystical Nitro: add your Hemocraft die to spell damage. Runic Ward: reduce damage with blood rune reaction.'],
-             ['Order of the Mutant', 'Homebrew',    '(Critical Role) Mutagencraft: brew mutagens each long rest — Potency (+STR), Swiftness (+DEX), Toughness (+CON), Sagacity (+INT), Perception (+WIS), Unbreakable (+resistance). Mutagens have a Mutagen Flaw (disadvantage on related primaryAttribute while active).'],
-             ['Order of the Lycan',   'Homebrew',   '(Critical Role) Hybrid Transformation: partially transform into a bestial hybrid. Feral Might: +1d6 to STR-based attacks while transformed. Bloodlust: when you drop to 0 HP while transformed, make a WIS save or attack the nearest creature.'],
-         ]
+    hitDice: 10,
+    primaryAttribute: ["DEX", "INT"],
+    spellAttribute: "INT",
+    isHalf: false,
+    Features: [
+      ["LVL 1", ""],
+      ["LVL 2", ""],
+      ["LVL 3", ""],
+      ["LVL 4", ""],
+      ["LVL 5", ""],
+      ["LVL 6", ""],
+      ["LVL 7", ""],
+      ["LVL 8", ""],
+      ["LVL 9", ""],
+      ["LVL 10", ""],
+      ["LVL 11", ""],
+      ["LVL 12", ""],
+      ["LVL 13", ""],
+      ["LVL 14", ""],
+      ["LVL 15", ""],
+      ["LVL 16", ""],
+      ["LVL 17", ""],
+      ["LVL 18", ""],
+      ["LVL 19", ""],
+      ["LVL 20", ""],
+    ],
+    subClass: [
+      [
+        "Order of the Ghostslayer",
+        "Homebrew",
+        "(Critical Role — Matt Mercer) Rite of the Dawn: Crimson Rite deals radiant damage and suppresses undead regeneration. Ethereal Step: enter the Border Ethereal briefly as a bonus action. Vengeful Spirit: when you die, your spirit remains for 1 minute to continue fighting.",
+      ],
+      [
+        "Order of the Profane Soul",
+        "Homebrew",
+        "(Critical Role) Pact Magic: gain warlock spell slots and cantrips (2 patrons available). Mystical Nitro: add your Hemocraft die to spell damage. Runic Ward: reduce damage with blood rune reaction.",
+      ],
+      [
+        "Order of the Mutant",
+        "Homebrew",
+        "(Critical Role) Mutagencraft: brew mutagens each long rest — Potency (+STR), Swiftness (+DEX), Toughness (+CON), Sagacity (+INT), Perception (+WIS), Unbreakable (+resistance). Mutagens have a Mutagen Flaw (disadvantage on related primaryAttribute while active).",
+      ],
+      [
+        "Order of the Lycan",
+        "Homebrew",
+        "(Critical Role) Hybrid Transformation: partially transform into a bestial hybrid. Feral Might: +1d6 to STR-based attacks while transformed. Bloodlust: when you drop to 0 HP while transformed, make a WIS save or attack the nearest creature.",
+      ],
+    ],
   },
-    ];
-// if (Options== "Character-inputs"){
-    let CharacterInputs = [
-        {
-        //Character header inputs
-            name: "",
-            level: "",
-            background: "",
-            PlayerName: "",
-            Race: "",
-            Alignment: "",
-            XP: "",
-        //Main Character inputs
-            Procficiency: "",
-            inspiration: false,
-            Strength: "",
-            Dexterity: "",
-            Constitution: "",
-            Intelligence: "",
-            Wisdom: "",
-            Charisma: "",
-        //Hit point and AC stuff
-            ArmorClass: "",
-            Initiative: "",
-            Speed : 30,
-            HitPoints: "",
-        //Attacks and Spells
-            AttackName: "",
-            ATKBonus: "",
-            DamageType: "",
-        }
-    ];
+];
 
+// if (Options== "Character-inputs"){
+let CharacterInputs = [
+  {
+    //Character header inputs
+    name: "",
+    level: "",
+    background: "",
+    PlayerName: "",
+    Race: "",
+    Alignment: "",
+    XP: "",
+    //Main Character inputs
+    Procficiency: "",
+    inspiration: false,
+    Strength: "",
+    Dexterity: "",
+    Constitution: "",
+    Intelligence: "",
+    Wisdom: "",
+    Charisma: "",
+    //Hit point and AC stuff
+    ArmorClass: "",
+    Initiative: "",
+    Speed: 30,
+    HitPoints: "",
+    //Attacks and Spells
+    AttackName: "",
+    ATKBonus: "",
+    DamageType: "",
+  },
+];
 
 // Create Class options
-CLASS_DATA.forEach(characterClass => {
+CLASS_DATA.forEach((characterClass) => {
+  const option = document.createElement("option");
 
-    const option = document.createElement("option");
+  option.value = characterClass.ClassName;
+  option.textContent = characterClass.ClassName;
 
-    option.value = characterClass.ClassName;
-    option.textContent = characterClass.ClassName;
-
-    classSelect.appendChild(option);
-
+  classSelect.appendChild(option);
 });
-
 
 // When Class changes
 classSelect.addEventListener("change", () => {
+  subclassSelect.innerHTML = `<option value="">Select a Subclass</option>`;
 
-    subclassSelect.innerHTML =
-        `<option value="">Select a Subclass</option>`;
+  subclassDescription.textContent = "";
 
-    subclassDescription.textContent = "";
+  const selectedClass = CLASS_DATA.find(
+    (characterClass) => characterClass.ClassName === classSelect.value,
+  );
 
-    const selectedClass = CLASS_DATA.find(
-        characterClass =>
-            characterClass.ClassName === classSelect.value
-    );
+  if (!selectedClass) return;
 
-    if (!selectedClass) return;
+  selectedClass.subClass.forEach((subclass, index) => {
+    const option = document.createElement("option");
 
-    selectedClass.subClass.forEach((subclass, index) => {
+    option.value = String(index);
+    option.textContent = subclass[0];
 
-        const option = document.createElement("option");
-
-        option.value = String(index);
-        option.textContent = subclass[0];
-
-        subclassSelect.appendChild(option);
-
-    });
-
+    subclassSelect.appendChild(option);
+  });
 });
-
 
 // When Subclass changes
 subclassSelect.addEventListener("change", () => {
-    const selectedClass = CLASS_DATA.find(
-        characterClass => characterClass.ClassName === classSelect.value
-    );
-    const selectedSubclass = selectedClass?.subClass[Number(subclassSelect.value)];
+  const selectedClass = CLASS_DATA.find(
+    (characterClass) => characterClass.ClassName === classSelect.value,
+  );
+  const selectedSubclass =
+    selectedClass?.subClass[Number(subclassSelect.value)];
 
-    subclassDescription.textContent = subclassSelect.value === ""
-        ? ""
-        : selectedSubclass?.[selectedSubclass.length - 1] ?? "";
-
+  subclassDescription.textContent =
+    subclassSelect.value === ""
+      ? ""
+      : (selectedSubclass?.[selectedSubclass.length - 1] ?? "");
 });
 
 function createCharacterSheet() {
-    const selectedClass = CLASS_DATA.find(
-        characterClass => characterClass.ClassName === classSelect.value
-    );
-    if (!selectedClass) {
-        classSelect.focus();
-        return;
-    }
+  const selectedClass = CLASS_DATA.find(
+    (characterClass) => characterClass.ClassName === classSelect.value,
+  );
+  if (!selectedClass) {
+    classSelect.focus();
+    return;
+  }
 
-    const selectedSubclass = subclassSelect.value === ""
-        ? null
-        : selectedClass.subClass[Number(subclassSelect.value)];
-    const sheet = document.getElementById("character-sheet");
-    const name = document.getElementById("CharacterName").value.trim();
-    const level = document.getElementById("LV").value;
-    const primaryAttributes = Array.isArray(selectedClass.primaryAttribute)
-        ? selectedClass.primaryAttribute.join(", ")
-        : selectedClass.primaryAttribute;
+  const selectedSubclass =
+    subclassSelect.value === ""
+      ? null
+      : selectedClass.subClass[Number(subclassSelect.value)];
+  const sheet = document.getElementById("character-sheet");
+  const name = document.getElementById("CharacterName").value.trim();
+  const level = document.getElementById("LV").value;
+  const primaryAttributes = Array.isArray(selectedClass.primaryAttribute)
+    ? selectedClass.primaryAttribute.join(", ")
+    : selectedClass.primaryAttribute;
 
-    sheet.replaceChildren();
+  sheet.replaceChildren();
 
-    const heading = document.createElement("h2");
-    heading.textContent = name || "Unnamed Character";
-    sheet.appendChild(heading);
+  const heading = document.createElement("h2");
+  heading.textContent = name || "Unnamed Character";
+  sheet.appendChild(heading);
 
-    const classDetails = document.createElement("p");
-    classDetails.textContent =
-        `${selectedClass.ClassName}${level ? ` — Level ${level}` : ""}`;
-    sheet.appendChild(classDetails);
+  const classDetails = document.createElement("p");
+  classDetails.textContent = `${selectedClass.ClassName}${level ? ` — Level ${level}` : ""}`;
+  sheet.appendChild(classDetails);
 
-    const hitDie = document.createElement("p");
-    hitDie.textContent = `Hit Die: d${selectedClass.hitDice}`;
-    sheet.appendChild(hitDie);
+  const hitDie = document.createElement("p");
+  hitDie.textContent = `Hit Die: d${selectedClass.hitDice}`;
+  sheet.appendChild(hitDie);
 
-    if (primaryAttributes) {
-        const attributes = document.createElement("p");
-        attributes.textContent = `Primary Attributes: ${primaryAttributes}`;
-        sheet.appendChild(attributes);
-    }
+  if (primaryAttributes) {
+    const attributes = document.createElement("p");
+    attributes.textContent = `Primary Attributes: ${primaryAttributes}`;
+    sheet.appendChild(attributes);
+  }
 
-    if (selectedSubclass) {
-        const subclassHeading = document.createElement("h3");
-        subclassHeading.textContent = selectedSubclass[0];
-        sheet.appendChild(subclassHeading);
+  if (selectedSubclass) {
+    const subclassHeading = document.createElement("h3");
+    subclassHeading.textContent = selectedSubclass[0];
+    sheet.appendChild(subclassHeading);
 
-        const subclassDescription = document.createElement("p");
-        subclassDescription.textContent =
-            selectedSubclass[selectedSubclass.length - 1];
-        sheet.appendChild(subclassDescription);
-    }
+    const subclassDescription = document.createElement("p");
+    subclassDescription.textContent =
+      selectedSubclass[selectedSubclass.length - 1];
+    sheet.appendChild(subclassDescription);
+  }
 }
 
 const backgrounddisplay = document.getElementById("backgroundinput");
 const backGround = [
-            ['Acolyte', 'Insight (Wis), Religion (Int)', 'none', '15 gp'],
-            ['Anthropologist',	'Insight (Wis), Religion (Int)', 'none', '10 gp'],
-            ['Archaeologist',	'History (Int), Survival (Wis)',	'Any x1	Choose 1: cartographers tools, navigators tools',	'25 gp'],
-            ['Athlete',	'Acrobatics (Dex), Athletics (Str)',	'Any x1	Vehicles (Land)', '10 gp'],
-            ['Azorius Functionary',	'Insight (Wis), Intimidation (Cha)',	'Any x2	None',  '10 gp'],
-            ['Black Fist Double Agent', 'CoS (AL)	Deception (Cha), Insight (Wis)',	'Any X2; Disguise kit, and choose 1: artisans tools x1, gaming set x1',	'15 gp'],
-            ['Boros Legionnaire',	'Athletics (Str), Intimidation (Cha)',	'Choose 1: Celestial, Draconic, Goblin, Minotaur	Choose 1: cartographers tools, navigators tools',	'2 gp'],
-            ['Caravan Specialist',	'Animal Handling (Wis), Survival (Wis)',	'Any x1	Vehicles (land)',	'10 gp'],
-            ['Celebrity Adventurers Scion',	'Perception (Wis), Performance (Cha)',	'Any x2	Disguise kit',	'30 gp'],
-            ['Charlatan',	',Deception (Cha), Sleight of Hand (Dex)',	'Disguise kit, forgery kit',	'15 gp'],
-            ['City Watch',	'Athletics (Str), Insight (Wis)',	'None',	'10 gp'],
-            ['Clan Crafter',	'History (Int), Insight (Wis)',	'Any x1	Artisans tools', '15 gp'],
-            ['Cloistered Scholar',	'History (Int)', 'choose 1: Arcana (Int), Nature (Int), Religion (Int)', '10 gp'],
-            ['Cormanthor Refugee',	'Nature (Int), Survival (Wis)',	'Artisans tools',	'5 gp'],
-            ['Courtier',	'Insight (Wis), Persuasion (Cha)',	'None',	'5 gp'],
-            [' Criminal',	'Deception (Cha), Stealth (Dex)',	'Gaming set x1, thieves tools',	'15 gp'],
-            ['Dimir Operative',	'Deception (Cha), Stealth (Dex)',	'None',	'Special'],
-            ['Dragon Casualty',	'Intimidation (Cha), Survival (Wis)',	'Special (see page)',	'5 gp'],
-            ['Earthspur Miner',	'Athletics (Str), Survival (Wis)',	'None',	'5 gp'],
-            ['Entertainer',	'Acrobatics (Dex), Performance (Cha)',	'Disguise kit, musical instrument x1',	'15 gp'],
-            ['Faceless',	'Deception (Cha), Intimidation (Cha)',	'Disguise kit',	'10 gp'],
-            ['Faction Agent',	'Insight (Wis), and choose 1: special (see page)',	'None',	'15 gp'],
-            ['Failed Merchant',	'Investigation (Int), Persuasion (Cha)', 'Artisans tools x1',	'10 gp'],
-            ['Far Traveler',	'Insight (Wis), Perception (Wis)',	'Choose 1: musical instrument x1, gaming set x1', '5 gp'],
-            ['Feylost',	'Deception (Cha), Survival (Wis)',	'Musical instrument x1',	'8 gp'],
-            ['Fisher',	'History (Int), Survival (Wis)',	'None',	'10 gp'],
-            ['Folk Hero',	'Animal Handling (Wis), Survival (Wis)',	'Artisans tools x1, vehicles (land)',	'10 gp'],
-            ['Gambler',	'Deception (Cha), Insight (Wis)',	'Gaming set x1',	'15 gp'],
-            ['Gate Urchin',	'Deception (Cha), Sleight of Hand (Dex)',	'Musical instrument x1, thieves tools',	'10 gp'],
-            ['Gate Warden',	'Persuasion (Cha), Survival (Wis)',	'None',	'10 gp'],
-            ['Giant Foundling',	'Intimidation (Cha), Survival (Wis)',	'None',	'10 gp'],
-            ['Golgari Agent',	'Nature (Int), Survival (Wis)',	'Poisoners Kit',	'10 gp'],
-            ['Grinner',	'Deception (Cha), Performance (Cha)',	'Musical instrument x1, thieves tools',	'15 gp'],
-            ['Gruul Anarch',	'Animal Handling (Wis), Athletics (Str)', 'None',	'10 gp'],
-            ['Guild Artisan	', 'Insight (Wis), Persuasion (Cha)',	'Artisans tools x1',	'15 gp'],
-            ['Harborfolk',	'Athletics (Str), Sleight of Hand (Dex)',	'Gaming set x1, vehicles (water)',	'5 gp'],
-            ['Haunted One',	'Choose 2: Arcana (Int), Investigation (Int), Religion (Int), Survival (Wis)',	'None',	'1 sp'],
-            ['Hermit',	'Medicine (Wis), Religion (Int)',	'Herbalism kit', '5 gp'],
-            ['Hillsfar Merchant',	'Insight (Wis), Persuasion (Cha)', 'Vehicles (land), vehicles (water)',	'25 gp'],
-            ['Hillsfar Smuggler',	'Perception (Wis), Stealth (Dex)',	'Forgery kit',	'5 gp'],
-            ['House Agent',	'Investigation (Int), Persuasion (Cha)',	'none',	'20 gp'],
-            ['Inheritor',	'Survival (Wis), and choose 1: Arcana (Int), History (Int), Religion (Int)', 'Gaming set x1, musical instrument x1', '15 gp'],
-            ['Initiate',	'Athletics (Str), Intimidation (Cha)',	'Gaming set x1, vehicles (land)', '15 gp'],
-            ['Inquisitor',	'Investigation (Int), Religion (Int)',	'Artisans tools x1, thieves tools',	'15 gp'],
-            ['Investigator',	'Choose 2: Insight (Wis), Investigation (Int), Perception (Wis)',	'Disguise kit, thieves tools',	'10 gp'],
-            ['Iron Route Bandit',	'Animal Handling (Wis), Stealth (Dex)',	'Gaming set x1, vehicles (land)',	'5 gp'],
-            ['Izzet Engineer',	'Arcana (Int), Investigation (Int)', 'Artisans tools x1',	'5 gp'],
-            ['Knight of the Order',	'Persuasion (Cha)', 'Choose 1: gaming set x1, musical instrument', '10 gp'],
-            ['Knight of Solamnia',	'Athletics (Str), Survival (Wis)',	'None',	'10 gp'],
-            ['Lorehold Student',	'History (Int), Religion (Int)', 'None',	'15 gp'],
-            ['Mage of High Sorcery',	'Arcana (Int), History (Int)',	'None',	'10 gp'],
-            ['Marine',	'Athletics (Str), Survival (Wis)',	'Vehicles (water, land)',	'10 gp'],
-            ['Mercenary Veteran',	'Athletics (Str), Persuasion (Cha)',	'Gaming set x1, vehicles (land)',	'10 gp'],
-            ['Mulmaster Aristocrat',	'Deception (Cha), Performance (Cha)',	'Artisans tools x1, musical instrument x1',	'10 gp'],
-            ['Noble',	'History (Int), Persuasion (Cha)',	'Gaming set x1',	'25 gp'],
-            ['Orzhov Representative',	'Intimidation (Cha), Religion (Int)',	'None',	'1 pp'],
-            ['Outlander',	'Athletics (Str), Survival (Wis)',	'Any x1	Musical instrument',	'10 gp'],
-            ['Phlan Insurgent',	'Stealth (Dex), Survival (Wis)',	'Artisans tools x1, vehicles (land)',	'5 gp'],
-            ['Phlan Refugee',	'Athletics (Str), Insight (Wis)',	'Artisans tools',	'15 gp'],
-            ['Plaintiff',	'Medicine (Wis), Persuasion (Cha)',	'Artisans tools',	'20 gp'],
-            ['Planar Philosopher',	'Arcana (Int), Persuasion (Cha)',	'None',	'10 gp'],
-            ['Prismari Student',	'Acrobatics (Dex), Performance (Cha)', 'Choose 1: musical instrument x1, artisans tools x1',	'10 gp'],
-            ['Quandrix Student',	'Arcana (Int), Nature (Int)',	'Artisans tools x1',	'15 gp'],
-            ['Rakdos Cultist',	'Acrobatics (Dex), Performance (Cha)',	'Musical instrument x1',	'10 gp'],
-            ['Rival Intern',	'History (Int), Investigation (Int)',	'Artisans tools x1',	'10 gp'],
-            ['Rune Carver', 'History (Int), Perception (Wis)',	'None',	'10 gp'],
-            ['Sage',	'Arcana (Int), History (Int)',	'None',	'10 gp'],
-            ['Sailor',	'Athletics (Str), Perception (Wis)',	'Navigators tools, vehicles (water)',	'10 gp'],
-            ['Secret Identity',	'Deception (Cha), Stealth (Dex)',	'Disguise kit, forgery kit',	'5 gp'],
-            ['Selesnya Initiate',	'Nature (Int), Persuasion (Cha)',	'Choose 1: artisans tools x1, musical instrument x1',	'5 gp'],
-            ['Shade Fanatic',	'Deception (Cha), Intimidation (Cha)',	'Forgery kit',	'15 gp'],
-            ['Shipwright',	'History (Int), Perception (Wis)',	'Carpenters tools, vehicles (water)',	'10 gp'],
-            ['Silverquill', 'Intimidation (Cha), Persuasion (Cha)',	'None',	'15 gp'],
-            ['Simic Scientist',	'Arcana (Int), Medicine (Wis)',	'None',	'10 gp'],
-            ['Smuggler',	'Athletics (Str), Deception (Cha)',	'Vehicles (water)',	'15 gp'],
-            ['Soldier', 'Athletics (Str), Intimidation (Cha)',	'Gaming set x1, vehicles (land)',	'10 gp'],
-            ['Stojanow Prisoner',	'Deception (Cha), Perception (Wis)',	'Gaming set x1, thieves tools',	'10 gp'],
-            ['Ticklebelly Nomad',	'Animal handling (Wis), Nature (Int)',	'Herbalism kit',	'5 gp'],
-            ['Trade Sheriff',	'Investigation (Int), Persuasion (Cha)',	'Thieves tools', '17 gp'],
-            ['Urban Bounty Hunter',	'Choose 2: Deception (Cha), Insight (Wis), Persuasion (Cha), Stealth (Dex)',	'Choose 2: gaming set x1, musical instrument x1, thieves tools',	'20 gp'],
-            ['Urchin',	'Sleight of Hand (Dex), Stealth (Dex)',	'Disguise kit, thieves tools',	'10 gp'],
-            ['Uthgardt Tribe Member',	'Athletics (Str), Survival (Wis)',	'Any x1	Choose 1: artisans tools x1, musical instrument x1',	'10 gp'],
-            ['Vizier',	'History (Int), Religion (Int)',	'Artisans tools x1, musical instrument x1',	'25 gp'],
-            ['Volstrucker Agent',	'Deception (Cha), Stealth (Dex)',	'Poisoners kit',	'10 gp'],
-            ['Waterdhavian Noble',	'History (Int), Persuasion (Cha)',	'Choose 1: gaming set x1, musical instrument x1',	'20 gp'],
-            ['Witchlight Hand',	'Performance (Cha), Sleight of Hand (Dex)',	'Choose 1: disguise kit, musical instrument x1',	'8 gp'],
-            ['Witherbloom Student',	'Nature (Int), Survival (Wis)',	'Any x1	Herbalism kit',	'15 gp'],
+  ["Acolyte", "Insight (Wis), Religion (Int)", "none", "15 gp"],
+  ["Anthropologist", "Insight (Wis), Religion (Int)", "none", "10 gp"],
+  [
+    "Archaeologist",
+    "History (Int), Survival (Wis)",
+    "Any x1	Choose 1: cartographers tools, navigators tools",
+    "25 gp",
+  ],
+  [
+    "Athlete",
+    "Acrobatics (Dex), Athletics (Str)",
+    "Any x1	Vehicles (Land)",
+    "10 gp",
+  ],
+  [
+    "Azorius Functionary",
+    "Insight (Wis), Intimidation (Cha)",
+    "Any x2	None",
+    "10 gp",
+  ],
+  [
+    "Black Fist Double Agent",
+    "CoS (AL)	Deception (Cha), Insight (Wis)",
+    "Any X2; Disguise kit, and choose 1: artisans tools x1, gaming set x1",
+    "15 gp",
+  ],
+  [
+    "Boros Legionnaire",
+    "Athletics (Str), Intimidation (Cha)",
+    "Choose 1: Celestial, Draconic, Goblin, Minotaur	Choose 1: cartographers tools, navigators tools",
+    "2 gp",
+  ],
+  [
+    "Caravan Specialist",
+    "Animal Handling (Wis), Survival (Wis)",
+    "Any x1	Vehicles (land)",
+    "10 gp",
+  ],
+  [
+    "Celebrity Adventurers Scion",
+    "Perception (Wis), Performance (Cha)",
+    "Any x2	Disguise kit",
+    "30 gp",
+  ],
+  [
+    "Charlatan",
+    ",Deception (Cha), Sleight of Hand (Dex)",
+    "Disguise kit, forgery kit",
+    "15 gp",
+  ],
+  ["City Watch", "Athletics (Str), Insight (Wis)", "None", "10 gp"],
+  [
+    "Clan Crafter",
+    "History (Int), Insight (Wis)",
+    "Any x1	Artisans tools",
+    "15 gp",
+  ],
+  [
+    "Cloistered Scholar",
+    "History (Int)",
+    "choose 1: Arcana (Int), Nature (Int), Religion (Int)",
+    "10 gp",
+  ],
+  [
+    "Cormanthor Refugee",
+    "Nature (Int), Survival (Wis)",
+    "Artisans tools",
+    "5 gp",
+  ],
+  ["Courtier", "Insight (Wis), Persuasion (Cha)", "None", "5 gp"],
+  [
+    " Criminal",
+    "Deception (Cha), Stealth (Dex)",
+    "Gaming set x1, thieves tools",
+    "15 gp",
+  ],
+  ["Dimir Operative", "Deception (Cha), Stealth (Dex)", "None", "Special"],
+  [
+    "Dragon Casualty",
+    "Intimidation (Cha), Survival (Wis)",
+    "Special (see page)",
+    "5 gp",
+  ],
+  ["Earthspur Miner", "Athletics (Str), Survival (Wis)", "None", "5 gp"],
+  [
+    "Entertainer",
+    "Acrobatics (Dex), Performance (Cha)",
+    "Disguise kit, musical instrument x1",
+    "15 gp",
+  ],
+  ["Faceless", "Deception (Cha), Intimidation (Cha)", "Disguise kit", "10 gp"],
+  [
+    "Faction Agent",
+    "Insight (Wis), and choose 1: special (see page)",
+    "None",
+    "15 gp",
+  ],
+  [
+    "Failed Merchant",
+    "Investigation (Int), Persuasion (Cha)",
+    "Artisans tools x1",
+    "10 gp",
+  ],
+  [
+    "Far Traveler",
+    "Insight (Wis), Perception (Wis)",
+    "Choose 1: musical instrument x1, gaming set x1",
+    "5 gp",
+  ],
+  [
+    "Feylost",
+    "Deception (Cha), Survival (Wis)",
+    "Musical instrument x1",
+    "8 gp",
+  ],
+  ["Fisher", "History (Int), Survival (Wis)", "None", "10 gp"],
+  [
+    "Folk Hero",
+    "Animal Handling (Wis), Survival (Wis)",
+    "Artisans tools x1, vehicles (land)",
+    "10 gp",
+  ],
+  ["Gambler", "Deception (Cha), Insight (Wis)", "Gaming set x1", "15 gp"],
+  [
+    "Gate Urchin",
+    "Deception (Cha), Sleight of Hand (Dex)",
+    "Musical instrument x1, thieves tools",
+    "10 gp",
+  ],
+  ["Gate Warden", "Persuasion (Cha), Survival (Wis)", "None", "10 gp"],
+  ["Giant Foundling", "Intimidation (Cha), Survival (Wis)", "None", "10 gp"],
+  ["Golgari Agent", "Nature (Int), Survival (Wis)", "Poisoners Kit", "10 gp"],
+  [
+    "Grinner",
+    "Deception (Cha), Performance (Cha)",
+    "Musical instrument x1, thieves tools",
+    "15 gp",
+  ],
+  ["Gruul Anarch", "Animal Handling (Wis), Athletics (Str)", "None", "10 gp"],
+  [
+    "Guild Artisan	",
+    "Insight (Wis), Persuasion (Cha)",
+    "Artisans tools x1",
+    "15 gp",
+  ],
+  [
+    "Harborfolk",
+    "Athletics (Str), Sleight of Hand (Dex)",
+    "Gaming set x1, vehicles (water)",
+    "5 gp",
+  ],
+  [
+    "Haunted One",
+    "Choose 2: Arcana (Int), Investigation (Int), Religion (Int), Survival (Wis)",
+    "None",
+    "1 sp",
+  ],
+  ["Hermit", "Medicine (Wis), Religion (Int)", "Herbalism kit", "5 gp"],
+  [
+    "Hillsfar Merchant",
+    "Insight (Wis), Persuasion (Cha)",
+    "Vehicles (land), vehicles (water)",
+    "25 gp",
+  ],
+  [
+    "Hillsfar Smuggler",
+    "Perception (Wis), Stealth (Dex)",
+    "Forgery kit",
+    "5 gp",
+  ],
+  ["House Agent", "Investigation (Int), Persuasion (Cha)", "none", "20 gp"],
+  [
+    "Inheritor",
+    "Survival (Wis), and choose 1: Arcana (Int), History (Int), Religion (Int)",
+    "Gaming set x1, musical instrument x1",
+    "15 gp",
+  ],
+  [
+    "Initiate",
+    "Athletics (Str), Intimidation (Cha)",
+    "Gaming set x1, vehicles (land)",
+    "15 gp",
+  ],
+  [
+    "Inquisitor",
+    "Investigation (Int), Religion (Int)",
+    "Artisans tools x1, thieves tools",
+    "15 gp",
+  ],
+  [
+    "Investigator",
+    "Choose 2: Insight (Wis), Investigation (Int), Perception (Wis)",
+    "Disguise kit, thieves tools",
+    "10 gp",
+  ],
+  [
+    "Iron Route Bandit",
+    "Animal Handling (Wis), Stealth (Dex)",
+    "Gaming set x1, vehicles (land)",
+    "5 gp",
+  ],
+  [
+    "Izzet Engineer",
+    "Arcana (Int), Investigation (Int)",
+    "Artisans tools x1",
+    "5 gp",
+  ],
+  [
+    "Knight of the Order",
+    "Persuasion (Cha)",
+    "Choose 1: gaming set x1, musical instrument",
+    "10 gp",
+  ],
+  ["Knight of Solamnia", "Athletics (Str), Survival (Wis)", "None", "10 gp"],
+  ["Lorehold Student", "History (Int), Religion (Int)", "None", "15 gp"],
+  ["Mage of High Sorcery", "Arcana (Int), History (Int)", "None", "10 gp"],
+  [
+    "Marine",
+    "Athletics (Str), Survival (Wis)",
+    "Vehicles (water, land)",
+    "10 gp",
+  ],
+  [
+    "Mercenary Veteran",
+    "Athletics (Str), Persuasion (Cha)",
+    "Gaming set x1, vehicles (land)",
+    "10 gp",
+  ],
+  [
+    "Mulmaster Aristocrat",
+    "Deception (Cha), Performance (Cha)",
+    "Artisans tools x1, musical instrument x1",
+    "10 gp",
+  ],
+  ["Noble", "History (Int), Persuasion (Cha)", "Gaming set x1", "25 gp"],
+  [
+    "Orzhov Representative",
+    "Intimidation (Cha), Religion (Int)",
+    "None",
+    "1 pp",
+  ],
+  [
+    "Outlander",
+    "Athletics (Str), Survival (Wis)",
+    "Any x1	Musical instrument",
+    "10 gp",
+  ],
+  [
+    "Phlan Insurgent",
+    "Stealth (Dex), Survival (Wis)",
+    "Artisans tools x1, vehicles (land)",
+    "5 gp",
+  ],
+  [
+    "Phlan Refugee",
+    "Athletics (Str), Insight (Wis)",
+    "Artisans tools",
+    "15 gp",
+  ],
+  ["Plaintiff", "Medicine (Wis), Persuasion (Cha)", "Artisans tools", "20 gp"],
+  ["Planar Philosopher", "Arcana (Int), Persuasion (Cha)", "None", "10 gp"],
+  [
+    "Prismari Student",
+    "Acrobatics (Dex), Performance (Cha)",
+    "Choose 1: musical instrument x1, artisans tools x1",
+    "10 gp",
+  ],
+  [
+    "Quandrix Student",
+    "Arcana (Int), Nature (Int)",
+    "Artisans tools x1",
+    "15 gp",
+  ],
+  [
+    "Rakdos Cultist",
+    "Acrobatics (Dex), Performance (Cha)",
+    "Musical instrument x1",
+    "10 gp",
+  ],
+  [
+    "Rival Intern",
+    "History (Int), Investigation (Int)",
+    "Artisans tools x1",
+    "10 gp",
+  ],
+  ["Rune Carver", "History (Int), Perception (Wis)", "None", "10 gp"],
+  ["Sage", "Arcana (Int), History (Int)", "None", "10 gp"],
+  [
+    "Sailor",
+    "Athletics (Str), Perception (Wis)",
+    "Navigators tools, vehicles (water)",
+    "10 gp",
+  ],
+  [
+    "Secret Identity",
+    "Deception (Cha), Stealth (Dex)",
+    "Disguise kit, forgery kit",
+    "5 gp",
+  ],
+  [
+    "Selesnya Initiate",
+    "Nature (Int), Persuasion (Cha)",
+    "Choose 1: artisans tools x1, musical instrument x1",
+    "5 gp",
+  ],
+  [
+    "Shade Fanatic",
+    "Deception (Cha), Intimidation (Cha)",
+    "Forgery kit",
+    "15 gp",
+  ],
+  [
+    "Shipwright",
+    "History (Int), Perception (Wis)",
+    "Carpenters tools, vehicles (water)",
+    "10 gp",
+  ],
+  ["Silverquill", "Intimidation (Cha), Persuasion (Cha)", "None", "15 gp"],
+  ["Simic Scientist", "Arcana (Int), Medicine (Wis)", "None", "10 gp"],
+  ["Smuggler", "Athletics (Str), Deception (Cha)", "Vehicles (water)", "15 gp"],
+  [
+    "Soldier",
+    "Athletics (Str), Intimidation (Cha)",
+    "Gaming set x1, vehicles (land)",
+    "10 gp",
+  ],
+  [
+    "Stojanow Prisoner",
+    "Deception (Cha), Perception (Wis)",
+    "Gaming set x1, thieves tools",
+    "10 gp",
+  ],
+  [
+    "Ticklebelly Nomad",
+    "Animal handling (Wis), Nature (Int)",
+    "Herbalism kit",
+    "5 gp",
+  ],
+  [
+    "Trade Sheriff",
+    "Investigation (Int), Persuasion (Cha)",
+    "Thieves tools",
+    "17 gp",
+  ],
+  [
+    "Urban Bounty Hunter",
+    "Choose 2: Deception (Cha), Insight (Wis), Persuasion (Cha), Stealth (Dex)",
+    "Choose 2: gaming set x1, musical instrument x1, thieves tools",
+    "20 gp",
+  ],
+  [
+    "Urchin",
+    "Sleight of Hand (Dex), Stealth (Dex)",
+    "Disguise kit, thieves tools",
+    "10 gp",
+  ],
+  [
+    "Uthgardt Tribe Member",
+    "Athletics (Str), Survival (Wis)",
+    "Any x1	Choose 1: artisans tools x1, musical instrument x1",
+    "10 gp",
+  ],
+  [
+    "Vizier",
+    "History (Int), Religion (Int)",
+    "Artisans tools x1, musical instrument x1",
+    "25 gp",
+  ],
+  [
+    "Volstrucker Agent",
+    "Deception (Cha), Stealth (Dex)",
+    "Poisoners kit",
+    "10 gp",
+  ],
+  [
+    "Waterdhavian Noble",
+    "History (Int), Persuasion (Cha)",
+    "Choose 1: gaming set x1, musical instrument x1",
+    "20 gp",
+  ],
+  [
+    "Witchlight Hand",
+    "Performance (Cha), Sleight of Hand (Dex)",
+    "Choose 1: disguise kit, musical instrument x1",
+    "8 gp",
+  ],
+  [
+    "Witherbloom Student",
+    "Nature (Int), Survival (Wis)",
+    "Any x1	Herbalism kit",
+    "15 gp",
+  ],
 ];
 
 const selectedBackground = backgrounddisplay?.value ?? "";
 const Backgrounddisplay = backGround.find(
-    ([backgroundName]) =>
-        backgroundName.trim().toLowerCase() === selectedBackground.trim().toLowerCase()
+  ([backgroundName]) =>
+    backgroundName.trim().toLowerCase() ===
+    selectedBackground.trim().toLowerCase(),
 );
 
 // } else if(Options == "Character-Sheet") {
-    // function Character_SHeet(){
-    //         Main.innerHTML =`
-           
-    //         <div id="header-containor"
-    //             <h4>Dungeons & Dragons</h4>
-    //             <div id="Character-Name" class="heading">
-    //                 <h5 id="Character-name"> ${CharacterInputs.name} </h5>
-    //             </div>
+// function Character_SHeet(){
+//         Main.innerHTML =`
 
-    //             <div id="basic-info" class="heading">
-    //                 <p>${CLASS_DATA.class} ${CharacterInputs.level}</p>
-    //                 <p>${CharacterInputs.background}</p>
-    //             </div>
-    //         </div>
+//         <div id="header-containor"
+//             <h4>Dungeons & Dragons</h4>
+//             <div id="Character-Name" class="heading">
+//                 <h5 id="Character-name"> ${CharacterInputs.name} </h5>
+//             </div>
 
-    //         <div id="Stats">
-    //             <div id="Proficency-bonus> <h4> ${CharacterInputs.Procficiency} </h4> </div>
-    //             <div id="Inspiration"> <p>${CharacterInputs.inspiration}</p>
-    //             <div class="StatPoints"> <h3>${CharacterInputs.Strength}</h3> </div>
-    //             <div class="StatPoints"> <h3>${CharacterInputs.Dexterity}</h3>  </div>
-    //             <div class="StatPoints"> <h3>${CharacterInputs.Constitution}</h3>  </div>
-    //             <div class="StatPoints"> <h3>${CharacterInputs.Intelligence}</h3>  </div>
-    //             <div class="StatPoints"> <h3>${CharacterInputs.Wisdom}</h3>  </div>
-    //             <div class="StatPoints"> <h3>${CharacterInputs.Charisma}</h3>  </div>
+//             <div id="basic-info" class="heading">
+//                 <p>${CLASS_DATA.class} ${CharacterInputs.level}</p>
+//                 <p>${CharacterInputs.background}</p>
+//             </div>
+//         </div>
 
-    //         </div>
-            
-    //         `
-        
-    // }
+//         <div id="Stats">
+//             <div id="Proficency-bonus> <h4> ${CharacterInputs.Procficiency} </h4> </div>
+//             <div id="Inspiration"> <p>${CharacterInputs.inspiration}</p>
+//             <div class="StatPoints"> <h3>${CharacterInputs.Strength}</h3> </div>
+//             <div class="StatPoints"> <h3>${CharacterInputs.Dexterity}</h3>  </div>
+//             <div class="StatPoints"> <h3>${CharacterInputs.Constitution}</h3>  </div>
+//             <div class="StatPoints"> <h3>${CharacterInputs.Intelligence}</h3>  </div>
+//             <div class="StatPoints"> <h3>${CharacterInputs.Wisdom}</h3>  </div>
+//             <div class="StatPoints"> <h3>${CharacterInputs.Charisma}</h3>  </div>
+
+//         </div>
+
+//         `
+
+// }
 // };
