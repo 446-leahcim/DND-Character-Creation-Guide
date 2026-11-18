@@ -99,6 +99,41 @@ const CLASS_DATA = [
           },
         ],
       },
+      {
+        level: 8,
+        features:[
+          {
+            name: "Ability Score Improvemnt or Feat",
+            description: "+2 to one ability score or +1 to two ability scores. Or gain a Feat"
+          }
+        ],
+      },
+      {
+        level: 9,
+        features: [
+          {
+            name: "SubClass Feature"
+          }
+        ],
+      },
+      {
+        level:10,
+        features: [
+          {
+            name: "Magic Item Adept",
+            description: "When you reach 10th level, you achieve a profound understanding of how to use and make magic items: You can attune to up to four magic items at once. If you craft a magic item with a rarity of common or uncommon, it takes you a quarter of the normal time, and it costs you half as much of the usual gold."
+          }
+        ],
+      },
+      {
+        level: 11,
+        features: [
+          {
+            name: ""
+          }
+        ]
+      }
+
     ],
     subClass: [
       {
