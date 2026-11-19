@@ -37,7 +37,7 @@ const CLASS_DATA = [
             name: "Infuse Item",
             description:
               "At 2nd level, youve gained the ability to imbue mundane items with certain magical infusions, turning those objects into magic items.",
-            details: [
+            features: [
               {
                 name: "Infusions",
                 description:
@@ -112,7 +112,8 @@ const CLASS_DATA = [
         level: 9,
         features: [
           {
-            name: "SubClass Feature"
+            name: "SubClass Feature",
+            description: "Check subclass to see feature",
           }
         ],
       },
@@ -129,57 +130,205 @@ const CLASS_DATA = [
         level: 11,
         features: [
           {
-            name: ""
+            name: "Spell-Storing Item",
+            description: "At 11th level, you can now store a spell in an object. Whenever you finish a long rest, you can touch one simple or martial weapon or one item that you can use as a spellcasting focus, and you store a spell in it, choosing a 1st- or 2nd-level spell from the artificer spell list that requires 1 action to cast (you neednt have it prepared). While holding the object, a creature can take an action to produce the spells effect from it, using your spellcasting ability modifier. If the spell requires concentration, the creature must concentrate. The spell stays in the object until its been used a number of times equal to twice your Intelligence modifier (minimum of twice) or until you use this feature again to store a spell in an object",
+          },
+        ],
+      },
+      {
+        level: 12,
+        features: [
+          {
+            name: "Ability score improvment or feat",
+            description: "+2 to one or +1 to two scores",
+          },
+        ],
+      },
+      {
+        level: 13,
+        features: [
+          {
+            name: "SubClass Feature",
+            description: "Check subclass to see feature",
+          }
+        ]
+      },
+      {
+        level: 14,
+        features: [
+          {
+            name: "Magic Item Savant",
+            description: "At 14th level, your skill with magic items deepens more: You can attune to up to five magic items at once. You ignore all class, race, spell and level requirements on attuning to or using a magic item."
+          }
+        ]
+      },
+      {
+        level: 15,
+        features: [
+          {
+            name: "Subclass feature",
+            description: "Check subclass to see feature",
+          }
+        ],
+      },
+      {
+        level:16,
+        features : [
+          {
+            name: "Ability Score improvment or feature",
+            description: "+2 to one or +1 to two ability score",
+          }
+        ]
+      },
+      {
+        level: 17,
+        features: [
+          {
+            name: "Subclass feature",
+            description: "Check subclass to see feature",
+          }
+        ]
+      },
+      {
+        level:18,
+        features: [
+          {
+            name: "Magic item Master",
+            description: "Starting at 18th level, you can attune up to six magic items at once.",
+          }
+        ]
+      },
+      {
+        level: 19,
+        features: [
+          {
+            name: "Subclass feature",
+            description: "Check subclass to see feature"
+          }
+        ]
+      },
+      {
+        level: 20,
+        features: [
+          {
+            name: "Soul of Artifice",
+            description: "At 20th level, you develop a mystical connection to your magic items, which you can draw on for protection: You gain a +1 bonus to all saving throws per magic item you are currently attuned to. If youre reduced to 0 hit points but not killed out-right, you can use your reaction to end one of your artificer infusions, causing you to drop to 1 hit point instead of 0."
           }
         ]
       }
-
     ],
     subClass: [
       {
         SubName: "Alchemist",
         origin: "official",
         description: "An Alchemist is an expert at combining reagents to produce magical effects.",
-        LVL3: "",
-        LVL5: "",
-        LVL9: "",
-        LVL15: "",
+        LVL3: [{
+            name: "",
+            description: "Arcane Armor: Beginning at 3rd level, your metallurgical pursuits have led to you making armor a conduit for your magic. As an action, you can turn a suit of armor you are wearing into Arcane Armor, provided you have smith's tools in hand. You gain the following benefits while wearing this armor: If the armor normally has a Strength requirement, the arcane armor lacks this requirement for you. You can use the arcane armor as a spellcasting focus for your artificer spells. He armor attaches to you and can’t be removed against your will. It also expands to cover your entire body, although you can retract or deploy the helmet as a bonus action. The armor replaces any missing limbs, functioning identically to a body part it is replacing. You can doff or don the armor as an action. The armor continues to be Arcane Armor until you don another suit of armor or you die. Beginning at 3rd level, you can customize your Arcane Armor. When you do so, choose one of the following armor models: Guardian or Infiltrator. The model you choose gives you special benefits while you wear it. Each model includes a special weapon. When you attack with that weapon, you can add your Intelligence modifier, instead of Strength or Dexterity, to the attack and damage rolls. You can change the armor's model whenever you finish a short or long rest, provided you have smith's tools in hand.",
+          ArmorModel: [
+            {
+              name:"Guardian", 
+              description: "You design your armor to be in the front line of conflict. It has the following features: Thunder Gauntlets. Each of the armor's gauntlets counts as a simple melee weapon while you aren't holding anything in it, and it deals 1d8 thunder damage on a hit. A creature hit by the gauntlet has disadvantage on attack rolls against targets other than you until the start of your next turn, as the armor magically emits a distracting pulse when the creature attacks someone else. Defensive Field. As a bonus action, you can gain temporary hit points equal to your level in this class, replacing any temporary hit points you already have. You lose these temporary hit points if you doff the armor. You can use this bonus action a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",         
+            },{
+              name:"Infiltrator",
+              description: " You customize your armor for subtle undertakings. It has the following features: Lightning Launcher. A gemlike node appears on one of your armored fists or on the chest (your choice). It counts as a simple ranged weapon, with a normal range of 90 feet and a long range of 300 feet, and it deals 1d6 lightning damage on a hit. Once on each of your turns when you hit a creature with it, you can deal an extra 1d6 lightning damage to that target. Powered Steps. Your walking speed increases by 5 feet. Dampening Field. You have advantage on Dexterity (Stealth) checks. If the armor normally imposes disadvantage on such checks, the advantage and disadvantage cancel each other, as normal.",
+              }],
+        LVL5: [{
+            name: "",
+            description: "",
+              }],
+        LVL9: [{
+            name: "",
+            description: "",
+              }],
+        LVL15: [{
+            name: "",
+            description: "",
+              }],
       },
       {
         SubName: "Artilerist",
         origin: "official",
         description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
-        LVL3: "",
-        LVL5: "",
-        LVL9: "",
-        LVL15: "",
+        LVL3: [{
+            name: "",
+            description: "",
+              }],
+        LVL5: [{
+            name: "",
+            description: "",
+              }],
+        LVL9: [{
+            name: "",
+            description: "",
+              }],
+        LVL15: [{
+            name: "",
+            description: "",
+              }],
       },
       {
         SubName: "Armorer",
         origin: "official",
         description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
-        LVL3: "",
-        LVL5: "",
-        LVL9: "",
-        LVL15: "",
+        LVL3: [{
+            name: "",
+            description: "",
+              }],
+        LVL5: [{
+            name: "",
+            description: "",
+              }],
+        LVL9: [{
+            name: "",
+            description: "",
+              }],
+        LVL15: [{
+            name: "",
+            description: "",
+              }],
     },
     {
         SubName: "Armorer",
         origin: "official",
         description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
-        LVL3: "",
-        LVL5: "",
-        LVL9: "",
-        LVL15: "",
+        LVL3: [{
+            name: "",
+            description: "",
+              }],
+        LVL5: [{
+            name: "",
+            description: "",
+              }],
+        LVL9: [{
+            name: "",
+            description: "",
+              }],
+        LVL15: [{
+            name: "",
+            description: "",
+              }],
     },
     {
         SubName: "Armorer",
         origin: "official",
         description: "An artificer who specializes as an Armorer modifies armor to function almost like a second skin.",
-        LVL3: "",
-        LVL5: "",
-        LVL9: "",
-        LVL15: "",
+        LVL3: [{
+            name: "",
+            description: "",
+              }],
+        LVL5: [{
+            name: "",
+            description: "",
+              }],
+        LVL9: [{
+            name: "",
+            description: "",
+              }],
+        LVL15: [{
+            name: "",
+            description: "",
+              }],
     },
     ],
   },
